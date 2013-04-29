@@ -1313,6 +1313,88 @@ Sound production is \textit{human}-specific, not \textit{language}-specific. Thu
 Idea: decode untranscribed audio data, select data with high confidence, use selected data to train / adapt recognizer.
 
 \newpage
+\section{Prüfungsfragen}
+\subsection{Allgemeine Fragen}
+\begin{itemize}
+\item Was ist MMMK? Wofür steht MMMK?
+\begin{itemize}
+\item \emph{Multilinguale Mensch-Maschine Kommunikation}
+\end{itemize}
+\item Wo findet MMMK Anwendung?
+\begin{itemize}
+\item \emph{Interaktion mit einem Computer/Maschine  mittels natürlicher Sprache}
+\end{itemize}
+\item Vor- und Nachteile gegenüber anderen Kommunikationsmitteln
+\begin{itemize}
+\item \emph{siehe Vor- und Nachteile im Kapitel 1} %variabel machen
+\end{itemize}
+\item Welche Probleme können dabei auftreten?
+\item Zeichnen sie das Blockschaubild (Young oder Schultz)
+\begin{itemize}
+\item \emph{siehe Overview Figure 1 und 2} % variabel referenzieren 
+\end{itemize}
+\item Geben Sie die Fundamentalformel (nach Bayes) an.
+\begin{itemize}
+\item $\hat{W} = argmax_{W} P(W | X) = argmax_{W} \frac{P(X|W) \cdot P(W)}{P(X)}$ 
+\end{itemize}
+\item Beschreiben Sie den Zusammenhang zwischen Fundamentalformel und Blockschaltbild.
+\begin{itemize}
+\item\emph{$P(X|W)$ kommt vom Akustischen Modell, $P(W)$ vom Sprachmodell, $P(X)$ ist die a-priori Wahrscheinlichkeit, 
+$argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
+\end{itemize}
+\item Was ist an Umgangssprache so schlimm?
+\begin{itemize}
+\item \emph{Grammatisch oft inkorrekt, Aussprache ggf. undeutlich bzw. untypisch}
+\end{itemize}
+\end{itemize}
+
+\subsection{Vorverarbeitung}
+\begin{itemize}
+\item Erklären sie die Funktionsweise eines Kondensatormikrophons.
+\begin{itemize}
+\item \emph{Zwei Membranen, eine dicke und eine dünne, die als Plattenkondensator fungieren. Die dünne Membran wird durch Schalldruckwellen angeregt und schwingt. Durch die Kapazitätsänderung kommt es zu einer messbaren Spannungsänderung.}
+\end{itemize}
+\item Was macht man bei der Vorverarbeitung?
+\begin{itemize}
+\item \emph{Quantisierung, Abtasten (Sampling) [Diskret] $\rightarrow$ Fouriertransformation um an Frequenz- und Zeitinformation zu gelangen.} 
+\end{itemize}
+\item Was muss beim Abtasten (Sampling) beachten?
+\begin{itemize}
+\item \emph{Nyqist-Theorem: Abtastfrequenz muss echt größer als der doppelten Signalfrequenz sein.}
+\end{itemize}
+\item Was machen Quantisierung und Sampling?
+\begin{itemize}
+\item \emph{Quantisierung diskretisiert die Y-Achse und Sampling die X-Achse.}
+\end{itemize}
+\item Was für ein Filter wird beim Sampling benötigt und warum?
+\begin{itemize}
+\item \emph{Tiefpassfilter, da wir ein bandbegrenztes Signal brauchen.}
+\end{itemize}
+\item In welchem Frequenzbereich hört der Mensch?
+\begin{itemize}
+\item \emph{bis zu 32k Hz, Abtastfrequenz ist üblicherweise 8kHz}
+\end{itemize}
+\item Warum wollen wir die Frequenzinformation haben?
+\begin{itemize}
+\item \emph{Das Ohr macht das auch so.}
+\end{itemize}
+\item Was macht man nach dem Digitalisieren des Signals?
+\begin{itemize}
+\item \emph{Nach der Digitalisierung wird das Signal gefenstert.}
+\end{itemize}
+\item Was wird beim Fenstern gemacht? Und warum wird das Signal gefenstert?
+\begin{itemize}
+\item \emph{Hier muss noch die Antwort rein.}
+\end{itemize}
+\end{itemize}
+
+
+\subsection{Akkustisches Modell}
+
+
+\subsection{Sprachmodell}
+
+\newpage
 
 \begin{figure}
 \centering
