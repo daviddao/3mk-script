@@ -1346,6 +1346,10 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \begin{itemize}
 \item \emph{Grammatisch oft inkorrekt, Aussprache ggf. undeutlich bzw. untypisch}
 \end{itemize}
+\item Was ist Co-Artikulation?
+\begin{itemize}
+\item Wenn die Aussprache eines Phonems/Wortes durch den umgebenden Kontext verändert wird.
+\end{itemize}
 \end{itemize}
 
 \subsection{Vorverarbeitung}
@@ -1382,18 +1386,88 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \begin{itemize}
 \item \emph{Nach der Digitalisierung wird das Signal gefenstert.}
 \end{itemize}
+\item Was für Fensterformen gibt es?
+\begin{itemize}
+\item -
+\end{itemize}
 \item Was wird beim Fenstern gemacht? Und warum wird das Signal gefenstert?
 \begin{itemize}
 \item \emph{Hier muss noch die Antwort rein.}
+\end{itemize}
+\item Wie glättet man anschließend das Signal?
+\begin{itemize}
+\item -
 \end{itemize}
 \end{itemize}
 
 
 \subsection{Akkustisches Modell}
+\begin{itemize}
+\item Zeichne HMM für ein Phonem/Wort.
+\begin{itemize}
+\item \emph{siehe HMMs}
+\end{itemize}
+\item Was für Topologien gibt es? Welche wird üblicherweise verwendet?
+\begin{itemize}
+\item \emph{Linear, Left-to-Right, Alternative paths, Ergodic, \textbf{Bakis}}
+\end{itemize}
+\item Warum benötigen HMMs 3 Zustände pro Phonem?
+\begin{itemize}
+\item \emph{Beginn, Mitte, Ende}
+\end{itemize}
+\item Woraus setzt sich eine HMM zusammen?
+\begin{itemize}
+\item Fünftupel $(S, \pi, A, B, V)$:
+\begin{itemize}
+\item Zustandsmenge $S = \{s_1,s_2,\dots,s_n\} - n$ is the number of states
+\item Initiale Wahrscheinlichkeitsverteilung $\pi(s_i) = P(q_1 = s_i)$
+\item Matrix der Zustandsübergangswahrscheinlichkeiten $1 \le i, j \le n, $\\ $A = (a_{ij}), a_{ij} = P(q_{t+1} = s_j | q_t = s_i)$
+\item Menge der Emissionswahrscheinlichkeiten $B = \{b_1, \dots, b_n\}, b_i(x) = P(o_t = x | q_t = s)$
+\item Symbolmenge $V = \{x_1,x_2,\dots,x_v\}$ (discrete) or $V = R^d$ (continuous)
+\end{itemize}
+\end{itemize}
+\item Was sind die drei Hauptprobleme von HMMs und mit welchem Algorithmus kann man sie jeweils lösen?
+\begin{itemize}
+\item \emph{Evaluation (Forward), Decoding (Viterbi) und Learning Problem (Forward-Backward Algortihm / Baum-Welsch) [ausführliche Erklärung der Probleme und Algorithmen s. Skript]}
+\end{itemize}
+\item Schreiben Sie [Forward/Viterbi/Forward-Backward/Baum-Welch] mit sämtlichen Formeln auf und erklären Sie die Vorgehensweise und Unterschiede.
+\begin{itemize}
+\item \emph{s. Skript}
+\end{itemize}
+\item Was steht in einem Pronounciation Dictionary?
+\begin{itemize}
+\item eine Liste von Wörtern mit zugehörigen Aussprachmöglichkeiten
+\end{itemize}
+\item Wie sind die HMMs gestaltet, sodass man mit weniger Trainingsdaten bessere Ergebnisse erzielt?
+\begin{itemize}
+\item \emph{Die bei den Emissionswahrscheinlichkeiten verwendeten Gaußverteilungen werden kombiniert und verschieden gewichtet.}
+\end{itemize}
+\item Wie verbindet man mehrere Wörter hintereinander?
+\begin{itemize}
+\item (Sprachmodell)
+\end{itemize}
+\end{itemize}
 
 
 \subsection{Sprachmodell}
-
+\begin{itemize}
+\item Was ist der Unterschied zwischen einem deterministischen und einem stochastischen Sprachmodell?
+\begin{itemize}
+\item \emph{In einem deterministischen LM [Grammatik] hat ist $P(W)$ für jede Wortsequenz $W$ entweder 1 oder 0. In einem stochastischen ist $P(W)$ eine Wahrscheinlichkeit.}
+\end{itemize}
+\item Geben Sie die Wahrsceinlichkeit für ein N-Gram an.
+\begin{itemize}
+\item $P(w_k | w_1w_2\dots w_{k-1}) = P(w_k | w_{k-(n-1)}w_{k-(n-2)}\dots w_{k-1})$
+\end{itemize}
+\item Was ist Smoothing?
+\begin{itemize}
+\item \emph{Allen Zeicheketten wird eine Wahrscheinlichkeit ungleich 0 zugewiesen um ASR Fehler zu vermeiden.}
+\end{itemize}
+\item Welche Smoothing-Verfahren gibt es?
+\begin{itemize}
+\item \emph{Add-One, Backoff Smoothing (Absolute discounting, Katz, Kneser-Ney) und Linear Interpolation (Deleted interpolation) [ausführliche Erklärungen der Verfahren s. Skript]}
+\end{itemize}
+\end{itemize}
 
 \newpage
 
