@@ -1350,6 +1350,14 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \begin{itemize}
 \item Wenn die Aussprache eines Phonems/Wortes durch den umgebenden Kontext verändert wird.
 \end{itemize}
+\item Was ist ein Phonem? 
+\begin{itemize}
+\item Kleinste Bedeutungsunterscheidende akkustische Einheit
+\end{itemize}
+\item Wie werden false starts modelliert? 
+\begin{itemize}
+\item Als Hypothese bekommt man genau das raus, was gesagt wurde inklusive aller Mhms und Ähs.
+\end{itemize}
 \end{itemize}
 
 \subsection{Vorverarbeitung}
@@ -1360,7 +1368,20 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \end{itemize}
 \item Was macht man bei der Vorverarbeitung?
 \begin{itemize}
-\item \emph{Quantisierung, Abtasten (Sampling) [Diskret] $\rightarrow$ Fouriertransformation um an Frequenz- und Zeitinformation zu gelangen.} 
+\item Tiefpassfilter (Anti-Alias-Filter)
+\item Abtasten (Sampling) [X-Achse diskret machen]
+\item Quantisieren [Y-Achse diskret machen]
+\item Fenstern
+\item Fouriertransformation um an Frequenzinformation zu gelangen
+\item Filterbänke anwenden zur Reduzierung der Dimension
+\item Logarithmieren (um einfacherer den Kanal loszuwerden)
+\item inverse Fouriertransformierte berechnen
+\item Ergebnis: Cepstralkoeffizienten
+\item Alternative: Linear Predictive Coding (berechne aus bisherigen Signalwerten die dann kommenden)
+\end{itemize}
+\item Was ist ein Vorteil vom Cepstrum? 
+\begin{itemize}
+\item Der Vokaltrakt ist bei allen Menschen etwa gleich und daher sind die Cepstralkoeffizienten relativ robust und sprecherunabhängig.
 \end{itemize}
 \item Was muss beim Abtasten (Sampling) beachten?
 \begin{itemize}
@@ -1388,15 +1409,31 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \end{itemize}
 \item Was für Fensterformen gibt es?
 \begin{itemize}
-\item -
+\item Rectangle, Gaussian, \textbf{Hamming}, Hanning
 \end{itemize}
 \item Was wird beim Fenstern gemacht? Und warum wird das Signal gefenstert?
 \begin{itemize}
-\item \emph{Hier muss noch die Antwort rein.}
+\item Man multipliziert das Signal mit einem Finite-Duration-Window und berechnet dann die DTFT. Das muss gemacht werden, da man ansonsten die zeitlichen Informationen nach der FT verlieren würde.
 \end{itemize}
-\item Wie glättet man anschließend das Signal?
+\item Wieso muss man anschließend das Signal noch filtern? Was ist die Mel-Filterbank? 
 \begin{itemize}
-\item -
+\item Viele der Fourierkoeffizienten enthalten redundante oder gar irreführende Informationen über die Mikrostruktur. Diese werden nicht benötigt. So reduziert man die Dimensionalität. \dots
+\end{itemize}
+\item Wie trennt man das stimulierende Signal von der "impulse response"?
+\begin{itemize}
+\item Es gilt $s(n) = u(n) *  h(n)$. \\ $\rightarrow_{FT} F(s) = F(u) \cdot F(h)$ \\ $\rightarrow_{LOG} F^{-1}(log(F(s))) = F^{-1}(log(F(u))) + F^{-1}(log(F(h)))$
+\end{itemize}
+\item Was ist MFCC? Und LPC?
+\begin{itemize}
+\item MFCC (Mel-Filter-Cepstral-Coefficients) bzw. Linear Predictive Coding, s. Skript
+\end{itemize}
+\item Was macht man mit einem Featurevektor? 
+\begin{itemize}
+\item Berechnen der Deltas und DeltaDeltas um Zeitinformationen zu erlangen.
+\end{itemize}
+\item Erläutere das Quelle-Filter-Model (Source-Filter Model). 
+\begin{itemize}
+\item s. Skript
 \end{itemize}
 \end{itemize}
 
@@ -1446,6 +1483,46 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \begin{itemize}
 \item (Sprachmodell)
 \end{itemize}
+\item Wie lange ist man mindestens in einem State? 
+\begin{itemize}
+\item 10ms
+\end{itemize}
+\item Woher bekommt man die HMMs? 
+\begin{itemize}
+\item Im Pronounciation Dictionary steht, aus welchen Phonemen ein Wort besteht. Das baut man dann für die Wörter zusammen.
+\end{itemize}
+\item Nenne ein Beispiel in dem Viterbi und Forward-Algorithmus nicht zum gleichen Ergebnis kommen. 
+\begin{itemize}
+\item viele Pfade mit ähnlicher Wahrscheinlichkeit, der wahrscheinlichste führt zu Wort X, alle anderen zu Y. Viterbi findet X, Forward findet Y
+\end{itemize}
+\item Wie trainiert man HMMs? 
+\begin{itemize}
+\item Mit einem Expectation-Maximation-Algorithmus (EM-Algorithmus), wie beispielsweise Baum-Welch.
+\end{itemize}
+\item Durch welche Parameter sind Gaußmixturverteilungen definiert? 
+\begin{itemize}
+\item Mittelwert, Varianz und Mixturgewicht
+\end{itemize}
+\item Welche Probleme können bei HMMs in der Modellierung im Sprachmodell auftreten? 
+\begin{itemize}
+\item Beim Eintritt in die HMM weiß man noch nicht, in welchem Wort man ist. Das ist bspw. für Bigramme schlecht. Daher verwendet man Delayed-Bigrams.
+\end{itemize}
+\item Wie kann man Koartikulation modellieren? 
+\begin{itemize}
+\item Jedes Phonem für jeden Kontext modellieren. Zu viele Kontexte, also Kontexte in Klassen zusammenfassen, via bottom-up oder top-down.
+\end{itemize}
+\item Wie kann man Viterbi (u.ä. Algorithmen) optimieren? 
+\begin{itemize}
+\item Beam Search
+\end{itemize}
+\item Wie können unterschiedliche Aussprachevarianten modelliert werden? (Bsp.: T in True und Tall)
+\begin{itemize}
+\item Markieren im Dictionary ODER Triphone (s. Skript)
+\end{itemize}
+\item Wie funktioniert Top-Down oder Bottom-Up Clustering 
+\begin{itemize}
+\item s. Skript
+\end{itemize}
 \end{itemize}
 
 
@@ -1455,9 +1532,13 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \begin{itemize}
 \item \emph{In einem deterministischen LM [Grammatik] hat ist $P(W)$ für jede Wortsequenz $W$ entweder 1 oder 0. In einem stochastischen ist $P(W)$ eine Wahrscheinlichkeit.}
 \end{itemize}
-\item Geben Sie die Wahrsceinlichkeit für ein N-Gram an.
+\item Geben Sie die Wahrscheinlichkeit für ein N-Gram an.
 \begin{itemize}
 \item $P(w_k | w_1w_2\dots w_{k-1}) = P(w_k | w_{k-(n-1)}w_{k-(n-2)}\dots w_{k-1})$
+\end{itemize}
+\item Wie werden die anfangs berechnet? 
+\begin{itemize}
+\item Man nimmt einen großen Textcorpus und zählt die Häufigkeiten. $P(w|history) = \frac{Count(history \cdot w)}{Count(history)}$
 \end{itemize}
 \item Was ist Smoothing?
 \begin{itemize}
@@ -1466,6 +1547,10 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \item Welche Smoothing-Verfahren gibt es?
 \begin{itemize}
 \item \emph{Add-One, Backoff Smoothing (Absolute discounting, Katz, Kneser-Ney) und Linear Interpolation (Deleted interpolation) [ausführliche Erklärungen der Verfahren s. Skript]}
+\end{itemize}
+\item Wie funktioniert Class-Based Interpolation? 
+\begin{itemize}
+\item s. Skript
 \end{itemize}
 \end{itemize}
 

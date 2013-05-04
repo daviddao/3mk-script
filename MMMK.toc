@@ -92,5 +92,5 @@
 \contentsline {section}{\numberline {12}Pr\IeC {\"u}fungsfragen}{30}
 \contentsline {subsection}{\numberline {12.1}Allgemeine Fragen}{30}
 \contentsline {subsection}{\numberline {12.2}Vorverarbeitung}{30}
-\contentsline {subsection}{\numberline {12.3}Akkustisches Modell}{31}
-\contentsline {subsection}{\numberline {12.4}Sprachmodell}{32}
+\contentsline {subsection}{\numberline {12.3}Akkustisches Modell}{32}
+\contentsline {subsection}{\numberline {12.4}Sprachmodell}{33}
