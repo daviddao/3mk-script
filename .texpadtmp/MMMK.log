@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  5 MAY 2013 15:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011) (format=pdflatex 2011.7.3)  5 MAY 2013 16:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -646,19 +646,19 @@ LaTeX Warning: No \author given.
 [1
 
 {/usr/local/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(/Users/David/Desktop/MMMK-Skript/.texpadtmp/MMMK.toc [2])
+(/Users/David/Desktop/MMMK-Skript/.texpadtmp/MMMK.toc [2] [3])
 \tf@toc=\write4
 \openout4 = `MMMK.toc'.
 
- [3] [4]
-<images/OverviewYoung.png, id=521, 748.7975pt x 675.52374pt>
+ [4]
+<images/OverviewYoung.png, id=526, 748.7975pt x 675.52374pt>
 File: images/OverviewYoung.png Graphic file (type png)
 
 <use images/OverviewYoung.png>
 Package pdftex.def Info: images/OverviewYoung.png used on input line 43.
 (pdftex.def)             Requested size: 284.52756pt x 256.68108pt.
 
-<images/OverviewSchultz.png, id=522, 1123.19624pt x 759.83875pt>
+<images/OverviewSchultz.png, id=527, 1123.19624pt x 759.83875pt>
 File: images/OverviewSchultz.png Graphic file (type png)
 
 <use images/OverviewSchultz.png>
@@ -669,7 +669,7 @@ Overfull \hbox (8.68979pt too wide) in paragraph at lines 62--72
  [] 
  []
 
-<images/Input.png, id=530, 949.5475pt x 508.90125pt>
+<images/Input.png, id=535, 949.5475pt x 508.90125pt>
 File: images/Input.png Graphic file (type png)
  <use images/Input.png>
 Package pdftex.def Info: images/Input.png used on input line 76.
@@ -684,14 +684,14 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
  [6 <./images/Input.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 200.
+(hyperref)                removing `math shift' on input line 201.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 200.
+(hyperref)                removing `math shift' on input line 201.
 
-[7] [8]
-Overfull \hbox (25.0723pt too wide) in paragraph at lines 291--292
+[7] [8] [9]
+Overfull \hbox (25.0723pt too wide) in paragraph at lines 339--340
 \OT1/cmr/bx/n/10.95 Problem: \OT1/cmr/m/n/10.95 Given an HMM $\OML/cmm/m/it/10.
 95 ^^U$ \OT1/cmr/m/n/10.95 and an ob-ser-va-tion $\OML/cmm/m/it/10.95 O \OT1/cm
 r/m/n/10.95 = (\OML/cmm/m/it/10.95 x[]; [] ; x[]\OT1/cmr/m/n/10.95 )$, com-pute
@@ -700,112 +700,81 @@ r/m/n/10.95 = (\OML/cmm/m/it/10.95 x[]; [] ; x[]\OT1/cmr/m/n/10.95 )$, com-pute
 )$. 
  []
 
-[9] [10]
-
-LaTeX Warning: Reference `fig:fullyContinuousHMMs' on page 11 undefined on inpu
-t line 425.
-
-[11]
-
-LaTeX Warning: Reference `fig:semiContinuousHMMs' on page 12 undefined on input
- line 439.
-
-[12] [13] [14] [15] [16] [17] [18]
+[10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 863.
+(hyperref)                removing `math shift' on input line 911.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 863.
+(hyperref)                removing `math shift' on input line 911.
 
-[19] [20] [21]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 967.
-
+[20] [21]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 967.
+(hyperref)                removing `math shift' on input line 1015.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 1015.
 
 [22] [23] [24]
 
-LaTeX Warning: Reference `fig:viterbiTreeSearchOptimization' on page 25 undefin
-ed on input line 1087.
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 1160.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1112.
+(hyperref)                removing `superscript' on input line 1160.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `superscript' on input line 1112.
+(hyperref)                removing `\ast' on input line 1160.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\ast' on input line 1112.
+(hyperref)                removing `math shift' on input line 1160.
 
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 1112.
-
-[25]
-
-LaTeX Warning: Reference `fig:delayedBigrams' on page 26 undefined on input lin
-e 1133.
-
-
-LaTeX Warning: Reference `fig:unigramLookahead' on page 26 undefined on input l
-ine 1145.
-
-[26]
-
-LaTeX Warning: Reference `fig:wordLattice' on page 27 undefined on input line 1
-181.
-
-[27] [28] [29] [30] [31]
-Overfull \hbox (39.25156pt too wide) in paragraph at lines 1432--1433
+[25] [26] [27] [28] [29] [30] [31]
+Overfull \hbox (39.25156pt too wide) in paragraph at lines 1480--1481
 \OT1/cmr/m/it/10.95 d^^?unne Mem-bran wird durch Schall-druck-wellen an-geregt 
 und schwingt. Durch die Ka-pazit^^?ats^^?anderung
  []
 
 [32] [33] [34]
-Overfull \hbox (14.43755pt too wide) in paragraph at lines 1565--1566
+Overfull \hbox (14.43755pt too wide) in paragraph at lines 1613--1614
 []\OT1/cmr/m/n/10.95 Mit einem Expectation-Maximation-Algorithmus (EM-Algorithm
 us), wie beispiel-sweise Baum-
  []
 
 
-Overfull \hbox (20.52547pt too wide) in paragraph at lines 1606--1607
+Overfull \hbox (20.52547pt too wide) in paragraph at lines 1654--1655
 []\OT1/cmr/m/n/10.95 Man nimmt einen gro^^Yen Textcor-pus und z^^?ahlt die H^^?
 aufigkeiten. $\OML/cmm/m/it/10.95 P\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 w\OM
 S/cmsy/m/n/10.95 j\OML/cmm/m/it/10.95 history\OT1/cmr/m/n/10.95 ) = []$ 
  []
 
 [35] [36]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1630.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1678.
  [37]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1630.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1678.
  (/Users/David/Desktop/MMMK-Skript/.texpadtmp/MMMK.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1630.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1630.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1678.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1678.
 
 Package rerunfilecheck Info: File `MMMK.out' has not changed.
 (rerunfilecheck)             Checksum: <no file>.
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1630.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1678.
  ) 
 Here is how much of TeX's memory you used:
- 8198 strings out of 493633
- 119502 string characters out of 3143378
- 224136 words of memory out of 3000000
- 11184 multiletter control sequences out of 15000+200000
+ 8201 strings out of 493633
+ 119554 string characters out of 3143378
+ 224426 words of memory out of 3000000
+ 11186 multiletter control sequences out of 15000+200000
  12709 words of font info for 47 fonts, out of 3000000 for 9000
  831 hyphenation exceptions out of 8191
  36i,11n,38p,637b,463s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -828,10 +797,10 @@ ive/2011/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive
 1/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2011/
 texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 Output written on /Users/David/Desktop/MMMK-Skript/.texpadtmp/MMMK.pdf (37 page
-s, 522786 bytes).
+s, 524082 bytes).
 PDF statistics:
- 862 PDF objects out of 1000 (max. 8388607)
- 794 compressed objects within 8 object streams
- 211 named destinations out of 1000 (max. 500000)
- 800 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 874 PDF objects out of 1000 (max. 8388607)
+ 805 compressed objects within 9 object streams
+ 212 named destinations out of 1000 (max. 500000)
+ 808 words of extra memory for PDF output out of 10000 (max. 10000000)
 

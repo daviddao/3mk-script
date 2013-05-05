@@ -175,6 +175,7 @@ A phoneme may correspond to one phone or a set of phones. In the latter case, al
 For example, /o/ and /u/ are phonemes in English because there are minimal pairs that differ only in these phonemes, such as ''bone`` and ''boon``. The English phoneme /p/ has two allophones, one with aspiration and one without it.
 
 \subsection{Problems with different Languages}
+More detailed LM-Handeling in chapter 7.9!
 \begin{itemize}
 \item{Words:}
 \begin{itemize}
@@ -209,9 +210,40 @@ where $\mu_i$ is the mean of points in $S_i$.
 
 \subsection{Comparing two utterances}
 
+Major problems:
+\begin{itemize}
+\item When does the utterance start?
+\item \emph{Solution: Speaker has to push/ Always records and pattern recognition}
+\item Number of speech vectors is varying (speaker-dependent, on purpose, non purposely)
+
+
+\item \emph{Solution:}
 \begin{itemize}
     \item linear alignment
     \item dynamic time warping (DTW)
+    \begin{itemize}
+    \item works like the dynamic editing distance algorithm (DP)
+    \item Cost function: vector-vector distance
+    \item \emph{Pro:} 
+    \begin{itemize}
+    \item only needs current and previous frame 
+    \item solves the different time-axis-alignment problem
+    \end{itemize}
+    
+    \item{\emph{Cons:}}
+    \begin{itemize}
+    \item Does not generalize
+    \item Speaker dependent
+    \item Need examples for each word for each speaker
+    \item Computationally expensive for large vocabularies
+    \item Continous speech cannot be segmentated except for human recognition because of \textbf{Co-Articulation, Hesitation and Hard decisions}.
+    \item $\rightarrow$ Works only for small vocabularies, speaker dependent recognition and isolated words
+    \end{itemize}
+
+\end{itemize}
+
+    \end{itemize}
+
 \end{itemize}
 
 \section{Signal processing}
@@ -283,6 +315,22 @@ Usually, we take the first coefficient (the power of the signal) and 12 more coe
 During further processing, we often assume that the speech signal at a given point of time is independent from the signal before and after that point of time. This is a poor assumption. So, if we have a feature vector $x$ (if we're using MFCCs, we have 13 coefficients), we also store the first and second derivatives of $x$, namely $\Delta x$ and $\Delta \Delta x$ (if we're using MFCCs, we now have 39 numbers).
 
 \section{Hidden Markov Models}
+
+\subsection{Why do we use HMMs?}
+\begin{itemize}
+\item mathematical foundation
+\item works with speech units shorter than words
+\begin{itemize}
+\item subword unit occurs often
+\item training easier
+\item less data required
+\end{itemize}
+\item Recognize speech from any speaker
+\item Recognize continous speech
+\item Recognize untrained words due to subwords compositions
+
+\end{itemize}
+
 
 \subsection{The three great problems}
 
