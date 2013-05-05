@@ -120,6 +120,40 @@
 
 \section{Basics}
 
+\subsection{Why is ASR so difficult?}
+\begin{itemize}
+\item Complexity
+\begin{itemize}
+\item typically 32000 Bytes per second (\textbf{amount of data})
+\item 50 phonemes, 5000 sounds, 100000 words (\textbf{class inventory})
+\item exponential growth of possible sentences (\textbf{combinatorial explosion})
+\end{itemize}
+
+\item Segmentation
+\begin{itemize}
+\item no boundary markers 
+\item continous flow of samples
+\end{itemize}
+
+\item Variability
+\begin{itemize}
+\item anatomy of vocal tract, speed, loudness, stess, dialect, mood (\textbf{speaker})
+\item noise, channel conditions, cocktail effect (\textbf{channel, enviroment})
+\end{itemize}
+
+\item Ambiguity
+\begin{itemize}
+\item similar sounding words (\textbf{homophones})
+\item interface vs in her face (\textbf{word boundaries})
+\item He saw the Grand Canyon flying to New York (\textbf{semantics})
+\item Time flies like an arrow (\textbf{practmatics})
+
+\end{itemize}
+
+
+\end{itemize}
+
+
 \subsection{Speech units}
 
 \begin{itemize}
@@ -131,6 +165,29 @@
 When the meaning of an utterance can be changed by replacing one phone in the utterance with another phone, the replaced phone and the phone that replaces it are said to form a \textbf{minimal pair}.
 A phoneme may correspond to one phone or a set of phones. In the latter case, all phones of the set are called \textbf{allophones} of the phoneme.
 For example, /o/ and /u/ are phonemes in English because there are minimal pairs that differ only in these phonemes, such as ''bone`` and ''boon``. The English phoneme /p/ has two allophones, one with aspiration and one without it.
+
+\subsection{Problems with different Languages}
+\begin{itemize}
+\item{Words:}
+\begin{itemize}
+\item{Indo-European:} Segmentation via whitespace
+\item{Japanese, Chinese, Thai:} No segmentation
+\end{itemize}
+
+\item{Spoken words:} Words are not marked by boundaries. Units can have intonation phrases (like , )
+
+\item{Compunding (e.g. German):} Donau-Schiff-Fahrts-Kapitäns-Mütze 
+\begin{itemize}
+\item \emph{How to handle}: Decompose compound words into constituent parts and carry out pronounciation and language modelling on the decomposed parts
+\end{itemize}
+ 
+ \item Highly inflected languages(e.g. Turkish, Arabic, Slavic): \emph{Inflection:} Modification of a word to express different grammatically categories (e.g. David-san) 
+ \begin{itemize}
+ \item \emph{How to handle:} Specific components for modelling inflection
+ \end{itemize}
+
+\end{itemize}
+
 
 \subsection{$k$-means clustering}
 
