@@ -10,90 +10,93 @@
 \contentsline {subsection}{\numberline {3.3}Problems with different Languages}{7}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}$k$-means clustering}{8}{subsection.3.4}
 \contentsline {subsection}{\numberline {3.5}Comparing two utterances}{8}{subsection.3.5}
-\contentsline {section}{\numberline {4}Signal processing}{8}{section.4}
-\contentsline {subsection}{\numberline {4.1}Short-Term Spectral Analysis}{8}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}Linear Predictive Coding}{9}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}Cepstra}{9}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}Mel-frequency cepstrum}{9}{subsubsection.4.3.1}
-\contentsline {subsection}{\numberline {4.4}Feature vectors}{10}{subsection.4.4}
-\contentsline {section}{\numberline {5}Hidden Markov Models}{10}{section.5}
-\contentsline {subsection}{\numberline {5.1}Why do we use HMMs?}{10}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}The three great problems}{10}{subsection.5.2}
-\contentsline {subsubsection}{\numberline {5.2.1}Evaluation}{10}{subsubsection.5.2.1}
-\contentsline {subsubsection}{\numberline {5.2.2}Decoding}{10}{subsubsection.5.2.2}
-\contentsline {subsubsection}{\numberline {5.2.3}The Backward algorithm}{11}{subsubsection.5.2.3}
-\contentsline {subsubsection}{\numberline {5.2.4}Learning / optimization}{11}{subsubsection.5.2.4}
-\contentsline {subsection}{\numberline {5.3}HMM state tying}{12}{subsection.5.3}
-\contentsline {subsubsection}{\numberline {5.3.1}Fully-continuous HMMs}{12}{subsubsection.5.3.1}
-\contentsline {subsubsection}{\numberline {5.3.2}Semi-continuous HMMs}{12}{subsubsection.5.3.2}
-\contentsline {subsubsection}{\numberline {5.3.3}Phonetically-tied semi-continuous HMMs}{12}{subsubsection.5.3.3}
-\contentsline {subsection}{\numberline {5.4}HMM training}{13}{subsection.5.4}
-\contentsline {subsection}{\numberline {5.5}HMM parameter initialization}{13}{subsection.5.5}
-\contentsline {section}{\numberline {6}Acoustic modeling}{14}{section.6}
-\contentsline {subsection}{\numberline {6.1}Discrete HMMs in continuous space}{14}{subsection.6.1}
-\contentsline {subsection}{\numberline {6.2}Source coding}{14}{subsection.6.2}
-\contentsline {subsection}{\numberline {6.3}Continuous HMMs}{14}{subsection.6.3}
-\contentsline {subsubsection}{\numberline {6.3.1}Conversion to semi-continuous model}{14}{subsubsection.6.3.1}
-\contentsline {subsubsection}{\numberline {6.3.2}Conversion to shared semi-continuous model}{14}{subsubsection.6.3.2}
-\contentsline {subsubsection}{\numberline {6.3.3}Conversion to tied semi-continuous model}{15}{subsubsection.6.3.3}
-\contentsline {subsection}{\numberline {6.4}Parameter tying}{15}{subsection.6.4}
-\contentsline {subsection}{\numberline {6.5}Lexicon}{15}{subsection.6.5}
-\contentsline {subsubsection}{\numberline {6.5.1}Pronunciation variants}{15}{subsubsection.6.5.1}
-\contentsline {subsection}{\numberline {6.6}Context dependent acoustic modeling}{15}{subsection.6.6}
-\contentsline {subsubsection}{\numberline {6.6.1}Crossword context modeling}{16}{subsubsection.6.6.1}
-\contentsline {subsubsection}{\numberline {6.6.2}Position dependent modeling}{16}{subsubsection.6.6.2}
-\contentsline {subsubsection}{\numberline {6.6.3}Parameter tying}{16}{subsubsection.6.6.3}
-\contentsline {subsection}{\numberline {6.7}Clustering}{16}{subsection.6.7}
-\contentsline {subsubsection}{\numberline {6.7.1}Continuous parametric models}{16}{subsubsection.6.7.1}
-\contentsline {subsubsection}{\numberline {6.7.2}Discrete models}{17}{subsubsection.6.7.2}
-\contentsline {subsubsection}{\numberline {6.7.3}Kai-Fu Lee}{17}{subsubsection.6.7.3}
-\contentsline {subsubsection}{\numberline {6.7.4}Decision trees}{17}{subsubsection.6.7.4}
-\contentsline {section}{\numberline {7}Language modeling}{18}{section.7}
-\contentsline {subsection}{\numberline {7.1}Smoothing}{19}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {7.1.1}``Add-one'' smoothing}{19}{subsubsection.7.1.1}
-\contentsline {subsubsection}{\numberline {7.1.2}Backoff smoothing}{19}{subsubsection.7.1.2}
-\contentsline {subsubsection}{\numberline {7.1.3}Linear interpolation}{20}{subsubsection.7.1.3}
-\contentsline {subsection}{\numberline {7.2}$n$-gram classes}{20}{subsection.7.2}
-\contentsline {subsection}{\numberline {7.3}Different kinds of language models}{20}{subsection.7.3}
-\contentsline {subsubsection}{\numberline {7.3.1}Cache language models}{20}{subsubsection.7.3.1}
-\contentsline {subsubsection}{\numberline {7.3.2}Trigger language models}{21}{subsubsection.7.3.2}
-\contentsline {subsubsection}{\numberline {7.3.3}Multilevel language models}{21}{subsubsection.7.3.3}
-\contentsline {subsubsection}{\numberline {7.3.4}Interleaved language models}{21}{subsubsection.7.3.4}
-\contentsline {subsubsection}{\numberline {7.3.5}Morpheme-based language models}{21}{subsubsection.7.3.5}
-\contentsline {subsubsection}{\numberline {7.3.6}Context-free grammar language models}{21}{subsubsection.7.3.6}
-\contentsline {subsubsection}{\numberline {7.3.7}Tree-based language models}{21}{subsubsection.7.3.7}
-\contentsline {subsubsection}{\numberline {7.3.8}HMMs for language modeling}{22}{subsubsection.7.3.8}
-\contentsline {subsection}{\numberline {7.4}Vocabulary selection}{22}{subsection.7.4}
-\contentsline {subsection}{\numberline {7.5}$n$-gram pruning}{22}{subsection.7.5}
-\contentsline {subsection}{\numberline {7.6}Problems with spontaneous speech}{22}{subsection.7.6}
-\contentsline {subsection}{\numberline {7.7}Unknown words}{23}{subsection.7.7}
-\contentsline {subsection}{\numberline {7.8}OOV words}{23}{subsection.7.8}
-\contentsline {subsection}{\numberline {7.9}Problems with different languages}{23}{subsection.7.9}
-\contentsline {subsection}{\numberline {7.10}Language model adaptation}{23}{subsection.7.10}
-\contentsline {subsubsection}{\numberline {7.10.1}Retrieval of adaptation data}{24}{subsubsection.7.10.1}
-\contentsline {subsubsection}{\numberline {7.10.2}Model interpolation}{24}{subsubsection.7.10.2}
-\contentsline {subsubsection}{\numberline {7.10.3}Constraint specification}{24}{subsubsection.7.10.3}
-\contentsline {subsubsection}{\numberline {7.10.4}Meta-information extraction}{24}{subsubsection.7.10.4}
-\contentsline {section}{\numberline {8}Search}{24}{section.8}
-\contentsline {subsection}{\numberline {8.1}DTW optimization}{25}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Viterbi optimization}{25}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}Advanced optimization techniques}{25}{subsection.8.3}
-\contentsline {subsubsection}{\numberline {8.3.1}Two-level DTW}{25}{subsubsection.8.3.1}
-\contentsline {subsubsection}{\numberline {8.3.2}Depth-first search}{25}{subsubsection.8.3.2}
-\contentsline {subsubsection}{\numberline {8.3.3}Viterbi beam search vs. $A^{\ast }$ stack decoder}{25}{subsubsection.8.3.3}
-\contentsline {subsubsection}{\numberline {8.3.4}One stage dynamic programming}{26}{subsubsection.8.3.4}
-\contentsline {subsubsection}{\numberline {8.3.5}Unigram lookahead}{26}{subsubsection.8.3.5}
-\contentsline {subsubsection}{\numberline {8.3.6}Multi-pass searches}{26}{subsubsection.8.3.6}
-\contentsline {subsubsection}{\numberline {8.3.7}Multiple hypothesises}{27}{subsubsection.8.3.7}
-\contentsline {section}{\numberline {9}Text-to-speech synthesis}{27}{section.9}
-\contentsline {subsection}{\numberline {9.1}Text analysis}{28}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}Linguistic analysis}{28}{subsection.9.2}
-\contentsline {subsubsection}{\numberline {9.2.1}Bootstrapping}{28}{subsubsection.9.2.1}
-\contentsline {subsection}{\numberline {9.3}Waveform synthesis}{29}{subsection.9.3}
-\contentsline {section}{\numberline {10}Spoken dialog systems}{29}{section.10}
-\contentsline {section}{\numberline {11}Multilingual speech processing}{30}{section.11}
-\contentsline {section}{\numberline {12}Pr\IeC {\"u}fungsfragen}{32}{section.12}
-\contentsline {subsection}{\numberline {12.1}Allgemeine Fragen}{32}{subsection.12.1}
-\contentsline {subsection}{\numberline {12.2}Vorverarbeitung}{32}{subsection.12.2}
-\contentsline {subsection}{\numberline {12.3}Akkustisches Modell}{34}{subsection.12.3}
-\contentsline {subsection}{\numberline {12.4}Sprachmodell}{35}{subsection.12.4}
+\contentsline {section}{\numberline {4}Signal processing}{9}{section.4}
+\contentsline {subsection}{\numberline {4.1}How can we extract features?}{9}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Acoustic Features in sampled signal}{9}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Frequency domain and Fouriertransformation}{9}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Short-Term Spectral Analysis}{10}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Linear Predictive Coding}{10}{subsection.4.5}
+\contentsline {subsection}{\numberline {4.6}Cepstra}{10}{subsection.4.6}
+\contentsline {subsubsection}{\numberline {4.6.1}Mel-frequency cepstrum}{11}{subsubsection.4.6.1}
+\contentsline {subsection}{\numberline {4.7}Feature vectors}{11}{subsection.4.7}
+\contentsline {section}{\numberline {5}Hidden Markov Models}{12}{section.5}
+\contentsline {subsection}{\numberline {5.1}Why do we use HMMs?}{12}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}The three great problems}{12}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Evaluation}{12}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}Decoding}{12}{subsubsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.3}The Backward algorithm}{13}{subsubsection.5.2.3}
+\contentsline {subsubsection}{\numberline {5.2.4}Learning / optimization}{13}{subsubsection.5.2.4}
+\contentsline {subsection}{\numberline {5.3}HMM state tying}{14}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Fully-continuous HMMs}{14}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}Semi-continuous HMMs}{14}{subsubsection.5.3.2}
+\contentsline {subsubsection}{\numberline {5.3.3}Phonetically-tied semi-continuous HMMs}{15}{subsubsection.5.3.3}
+\contentsline {subsection}{\numberline {5.4}HMM training}{15}{subsection.5.4}
+\contentsline {subsection}{\numberline {5.5}HMM parameter initialization}{15}{subsection.5.5}
+\contentsline {section}{\numberline {6}Acoustic modeling}{16}{section.6}
+\contentsline {subsection}{\numberline {6.1}Discrete HMMs in continuous space}{16}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Source coding}{16}{subsection.6.2}
+\contentsline {subsection}{\numberline {6.3}Continuous HMMs}{16}{subsection.6.3}
+\contentsline {subsubsection}{\numberline {6.3.1}Conversion to semi-continuous model}{16}{subsubsection.6.3.1}
+\contentsline {subsubsection}{\numberline {6.3.2}Conversion to shared semi-continuous model}{16}{subsubsection.6.3.2}
+\contentsline {subsubsection}{\numberline {6.3.3}Conversion to tied semi-continuous model}{16}{subsubsection.6.3.3}
+\contentsline {subsection}{\numberline {6.4}Parameter tying}{17}{subsection.6.4}
+\contentsline {subsection}{\numberline {6.5}Lexicon}{17}{subsection.6.5}
+\contentsline {subsubsection}{\numberline {6.5.1}Pronunciation variants}{17}{subsubsection.6.5.1}
+\contentsline {subsection}{\numberline {6.6}Context dependent acoustic modeling}{17}{subsection.6.6}
+\contentsline {subsubsection}{\numberline {6.6.1}Crossword context modeling}{18}{subsubsection.6.6.1}
+\contentsline {subsubsection}{\numberline {6.6.2}Position dependent modeling}{18}{subsubsection.6.6.2}
+\contentsline {subsubsection}{\numberline {6.6.3}Parameter tying}{18}{subsubsection.6.6.3}
+\contentsline {subsection}{\numberline {6.7}Clustering}{18}{subsection.6.7}
+\contentsline {subsubsection}{\numberline {6.7.1}Continuous parametric models}{18}{subsubsection.6.7.1}
+\contentsline {subsubsection}{\numberline {6.7.2}Discrete models}{19}{subsubsection.6.7.2}
+\contentsline {subsubsection}{\numberline {6.7.3}Kai-Fu Lee}{19}{subsubsection.6.7.3}
+\contentsline {subsubsection}{\numberline {6.7.4}Decision trees}{19}{subsubsection.6.7.4}
+\contentsline {section}{\numberline {7}Language modeling}{21}{section.7}
+\contentsline {subsection}{\numberline {7.1}Smoothing}{21}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}``Add-one'' smoothing}{21}{subsubsection.7.1.1}
+\contentsline {subsubsection}{\numberline {7.1.2}Backoff smoothing}{22}{subsubsection.7.1.2}
+\contentsline {subsubsection}{\numberline {7.1.3}Linear interpolation}{23}{subsubsection.7.1.3}
+\contentsline {subsection}{\numberline {7.2}$n$-gram classes}{23}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Different kinds of language models}{23}{subsection.7.3}
+\contentsline {subsubsection}{\numberline {7.3.1}Cache language models}{23}{subsubsection.7.3.1}
+\contentsline {subsubsection}{\numberline {7.3.2}Trigger language models}{23}{subsubsection.7.3.2}
+\contentsline {subsubsection}{\numberline {7.3.3}Multilevel language models}{24}{subsubsection.7.3.3}
+\contentsline {subsubsection}{\numberline {7.3.4}Interleaved language models}{24}{subsubsection.7.3.4}
+\contentsline {subsubsection}{\numberline {7.3.5}Morpheme-based language models}{24}{subsubsection.7.3.5}
+\contentsline {subsubsection}{\numberline {7.3.6}Context-free grammar language models}{24}{subsubsection.7.3.6}
+\contentsline {subsubsection}{\numberline {7.3.7}Tree-based language models}{24}{subsubsection.7.3.7}
+\contentsline {subsubsection}{\numberline {7.3.8}HMMs for language modeling}{25}{subsubsection.7.3.8}
+\contentsline {subsection}{\numberline {7.4}Vocabulary selection}{25}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}$n$-gram pruning}{25}{subsection.7.5}
+\contentsline {subsection}{\numberline {7.6}Problems with spontaneous speech}{25}{subsection.7.6}
+\contentsline {subsection}{\numberline {7.7}Unknown words}{26}{subsection.7.7}
+\contentsline {subsection}{\numberline {7.8}OOV words}{26}{subsection.7.8}
+\contentsline {subsection}{\numberline {7.9}Problems with different languages}{26}{subsection.7.9}
+\contentsline {subsection}{\numberline {7.10}Language model adaptation}{26}{subsection.7.10}
+\contentsline {subsubsection}{\numberline {7.10.1}Retrieval of adaptation data}{27}{subsubsection.7.10.1}
+\contentsline {subsubsection}{\numberline {7.10.2}Model interpolation}{27}{subsubsection.7.10.2}
+\contentsline {subsubsection}{\numberline {7.10.3}Constraint specification}{27}{subsubsection.7.10.3}
+\contentsline {subsubsection}{\numberline {7.10.4}Meta-information extraction}{27}{subsubsection.7.10.4}
+\contentsline {section}{\numberline {8}Search}{28}{section.8}
+\contentsline {subsection}{\numberline {8.1}DTW optimization}{28}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Viterbi optimization}{28}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Advanced optimization techniques}{28}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {8.3.1}Two-level DTW}{28}{subsubsection.8.3.1}
+\contentsline {subsubsection}{\numberline {8.3.2}Depth-first search}{29}{subsubsection.8.3.2}
+\contentsline {subsubsection}{\numberline {8.3.3}Viterbi beam search vs. $A^{\ast }$ stack decoder}{29}{subsubsection.8.3.3}
+\contentsline {subsubsection}{\numberline {8.3.4}One stage dynamic programming}{29}{subsubsection.8.3.4}
+\contentsline {subsubsection}{\numberline {8.3.5}Unigram lookahead}{30}{subsubsection.8.3.5}
+\contentsline {subsubsection}{\numberline {8.3.6}Multi-pass searches}{30}{subsubsection.8.3.6}
+\contentsline {subsubsection}{\numberline {8.3.7}Multiple hypothesises}{30}{subsubsection.8.3.7}
+\contentsline {section}{\numberline {9}Text-to-speech synthesis}{31}{section.9}
+\contentsline {subsection}{\numberline {9.1}Text analysis}{31}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Linguistic analysis}{32}{subsection.9.2}
+\contentsline {subsubsection}{\numberline {9.2.1}Bootstrapping}{32}{subsubsection.9.2.1}
+\contentsline {subsection}{\numberline {9.3}Waveform synthesis}{32}{subsection.9.3}
+\contentsline {section}{\numberline {10}Spoken dialog systems}{33}{section.10}
+\contentsline {section}{\numberline {11}Multilingual speech processing}{34}{section.11}
+\contentsline {section}{\numberline {12}Pr\IeC {\"u}fungsfragen}{36}{section.12}
+\contentsline {subsection}{\numberline {12.1}Allgemeine Fragen}{36}{subsection.12.1}
+\contentsline {subsection}{\numberline {12.2}Vorverarbeitung}{36}{subsection.12.2}
+\contentsline {subsection}{\numberline {12.3}Akkustisches Modell}{38}{subsection.12.3}
+\contentsline {subsection}{\numberline {12.4}Sprachmodell}{39}{subsection.12.4}

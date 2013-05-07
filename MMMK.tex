@@ -217,10 +217,8 @@ Major problems:
 \item Number of speech vectors is varying (speaker-dependent, on purpose, non purposely)
 
 
-\item \emph{Solution:}
-\begin{itemize}
-    \item linear alignment
-    \item dynamic time warping (DTW)
+\item \emph{Solution:} Dynamic Time Warping
+
     \begin{itemize}
     \item works like the dynamic editing distance algorithm (DP)
     \item Cost function: vector-vector distance
@@ -244,20 +242,92 @@ Major problems:
 
     \end{itemize}
 
-\end{itemize}
+\newpage
 
 \section{Signal processing}
+Remember: Parametric representation depends on targeted application (speech coding, speech synthesis, speech recognition)
+\subsection{How can we extract features?}
+
+Our goal: Continous signal $\rightarrow$ Discrete representation
+
+\begin{itemize}
+\item sampling (x-Axis)
+\begin{itemize}
+\item Aliasing possible if sampling rate is not at least 2 times maximal frequency (Nyquist or sampling theorem)
+\end{itemize}
+
+\item quantization (y-Axis)
+\begin{itemize}
+\item SNR (Signal to Noise Ratio) $\frac{power\left(signal\left[i\right]\right)}{power\left(noise\left[i\right]\right)}$
+\item SNR low $\rightarrow$ Recognition performance is low
+\item speech signal is usually between 50dB and 60dB
+\end{itemize}
+
+\end{itemize}
+
+\subsection{Acoustic Features in sampled signal}
+\begin{itemize}
+\item Amplitude
+\item Power (Integral of squared signal)
+\begin{itemize}
+\item useful for detecting speech, syllabus, phrase boundaries
+\end{itemize}
+\item Peak to Peak
+\item Root mean square
+\item Zero crossing
+\begin{itemize}
+\item can help distinguishing some weak sounds from silence
+\end{itemize}
+\item voiced/unvoiced
+
+
+\end{itemize}
+
+\subsection{Frequency domain and Fouriertransformation}
+Why preform signal processing in the frequency domain?
+\begin{itemize}
+\item Human hearing is based on frequency analysis
+\item Use of frequency analysis often facilitates understanding
+\item Use of frequency analysis often simplifies signal processing
+\end{itemize}
+
+We can transform signals from time domain into frequency domain via \textbf{Fouriertransformation} 
+\begin{itemize}
+\item \emph{continuous}: $F\left(w\right) = \int f\left(t\right)e^{-iwt}dt$ - inverse: $f\left(t\right) = \frac{1}{2\pi}\int F\left(w\right)e^{-iwt}dw$ 
+\item \emph{discrete}: $F\left(x\left[k\right]\right) = \sum x\left[k\right]e^{-iwt}dt$ - inverse: $x\left[k\right] = \frac{1}{2\pi}\int F\left(x\left[k\right]\right)e^{-iwt}dw$ 
+\end{itemize}
+Fouriertransformation have got some useful computational properties:
+\begin{itemize}
+\item Modelling a channel often can be accomplished by \emph{convolution}
+\item A \emph{convolution} in time domain is a \emph{multiplication} in frequency domain and a \emph{summation} in log-frequency domain
+\item Due to invertibility no information is lost
+\end{itemize}
+
 
 \subsection{Short-Term Spectral Analysis}
+
+Problem: Frequency over an entire utterance does not help much because most acoustic events are not static, have durations in the range of 10 to 100ms and need more detailed analysis.  \\
+
+Idea: To better analyse our utterance we partition the utterance into short segments which may overlap each other. This is done by short-term spectral analysis. \\
 
 The general idea of short-term spectral analysis is to
 
 \begin{itemize}
     \item multiply the speech signal with a window function
+    \begin{itemize}
+    \item \emph{Reason:} Conventional fourier analysis does not capture time varying nature. \\ Furthermore it smooths the resulting spectrum
+    \item \emph{Some popular window functions:} Hamming (most used), Hanning, Rectangle, Gaussian
+    \end{itemize}
+
     \item apply the Discrete Time Fourier Transform (DTFT)
     \item use a filterbank (such as \textit{Mel} or \textit{Bark})
+    \begin{itemize}
+    \item \emph{Reason:} Fourier coefficients reflects too much of the signals microstructure which contains a lot of redundancies and misleading information. We have to filter according to the human ear (works also with filterbanks!)
+    \end{itemize}
+
 \end{itemize}
 
+\emph{Notice:} Instead of multiplying the speech signal with a window function and applying DTFT afterwards, you can also apply DTFT on the window function first and then multiply with the speech signal. The result will be the same.
 \subsection{Linear Predictive Coding}
 
 LPC is an alternative to Fourier analysis. When using LPC, we assume that a speech signal is produced by a buzzer (\textit{glottis}) at the end of a tube (\textit{vocal tract}), with occasional added hissing and popping sounds. Then, the intensity and frequency can be estimated with linear prediction:
@@ -313,6 +383,8 @@ Usually, we take the first coefficient (the power of the signal) and 12 more coe
 \subsection{Feature vectors}
 
 During further processing, we often assume that the speech signal at a given point of time is independent from the signal before and after that point of time. This is a poor assumption. So, if we have a feature vector $x$ (if we're using MFCCs, we have 13 coefficients), we also store the first and second derivatives of $x$, namely $\Delta x$ and $\Delta \Delta x$ (if we're using MFCCs, we now have 39 numbers).
+
+\newpage
 
 \section{Hidden Markov Models}
 
@@ -529,6 +601,8 @@ Use labeled data:
         \end{itemize}
     \item use partial labels
 \end{itemize}
+
+\newpage
 
 \section{Acoustic modeling}
 
@@ -770,6 +844,8 @@ See figure~\ref{fig:growDecisionTree} for an example.
 \end{figure}
 
 \textbf{Note:} It doesn't matter which questions we ask, as long as our question set allows for a variable enough separation.
+
+\newpage
 
 \section{Language modeling}
 
@@ -1102,6 +1178,8 @@ We have to retrieve our adaption data froms somehwere:
 \subsubsection{Meta-information extraction}
 \textbf{Idea:} Use corpus $\mathcal{A}$ to extract background information about the underlying subject matter. Improve upon the background model based on semantic classification.
 
+\newpage
+
 \section{Search}
 
 \textbf{Isolated word recognition:}
@@ -1235,6 +1313,8 @@ A problem with multiple hypothesises is that the results are often quite similar
     \caption{\label{fig:wordLattice} A word lattice.}
 \end{figure}
 
+\newpage
+
 \section{Text-to-speech synthesis}
 
 Typically, text-to-speech synthesis involves three steps:
@@ -1300,6 +1380,8 @@ Concatinative synthesis:
     \item cluster-based unit selection
 \end{itemize}
 
+\newpage
+
 \section{Spoken dialog systems}
 
 A dialog is a verbal interaction of two or more agents over more than one utterance in order to establish a joint goal. A spoken dialog system is an autonomous, artificial system that engages in a dialog with a human and employs speech recognition and synthesis. Commonly, a complete interaction is referred to as a \textit{session}, an \textit{utterance} is one person's speech between two pauses, and a \textit{turn} represents all utterances of one partner, until the other partner starts interacting. A \textit{barge-in} happens when a turn is interrupted.
@@ -1342,6 +1424,8 @@ The dialog system has to communicate with the ASR system. Returning only the bes
 \vspace{5pt}
 
 If our system is \textit{multimodal}, we can also use gestures, etc.
+
+\newpage
 
 \section{Multilingual speech processing}
 
@@ -1498,7 +1582,7 @@ $argmax$ ist der Decoder und $\hat{W}$ die wahrscheinlichste Hypothese.}
 \end{itemize}
 \item Was muss beim Abtasten (Sampling) beachten?
 \begin{itemize}
-\item \emph{Nyqist-Theorem: Abtastfrequenz muss echt größer als der doppelten Signalfrequenz sein.}
+\item \emph{Shannon-Nyqist-Theorem: Abtastfrequenz muss echt größer als der doppelten Signalfrequenz sein.}
 \end{itemize}
 \item Was machen Quantisierung und Sampling?
 \begin{itemize}
