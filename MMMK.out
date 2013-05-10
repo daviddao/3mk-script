@@ -1,0 +1,107 @@
+\BOOKMARK [1][-]{section.1}{Overview}{}% 1
+\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Why do we need Automatic Speech Recognition \(ASR\)?}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Where is Speech Recognition and Understanding useful?}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Human-Machine Interaction}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Human-Human Interaction}{subsection.2.2}% 6
+\BOOKMARK [1][-]{section.3}{Basics}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Why is ASR so difficult?}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Speech units}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Problems with different Languages}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.4}{k-means clustering}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.5}{Comparing two utterances}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{Signal processing}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{How can we extract features?}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{Acoustic Features in sampled signal}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.3}{Frequency domain and Fouriertransformation}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.4}{Short-Term Spectral Analysis}{section.4}% 17
+\BOOKMARK [2][-]{subsection.4.5}{Linear Predictive Coding}{section.4}% 18
+\BOOKMARK [2][-]{subsection.4.6}{Cepstra}{section.4}% 19
+\BOOKMARK [3][-]{subsubsection.4.6.1}{Mel-frequency cepstrum}{subsection.4.6}% 20
+\BOOKMARK [2][-]{subsection.4.7}{Feature vectors}{section.4}% 21
+\BOOKMARK [1][-]{section.5}{Hidden Markov Models}{}% 22
+\BOOKMARK [2][-]{subsection.5.1}{Why do we use HMMs?}{section.5}% 23
+\BOOKMARK [2][-]{subsection.5.2}{The three great problems}{section.5}% 24
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Evaluation}{subsection.5.2}% 25
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Decoding}{subsection.5.2}% 26
+\BOOKMARK [3][-]{subsubsection.5.2.3}{The Backward algorithm}{subsection.5.2}% 27
+\BOOKMARK [3][-]{subsubsection.5.2.4}{Learning / optimization}{subsection.5.2}% 28
+\BOOKMARK [2][-]{subsection.5.3}{HMM state tying}{section.5}% 29
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Fully-continuous HMMs}{subsection.5.3}% 30
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Semi-continuous HMMs}{subsection.5.3}% 31
+\BOOKMARK [3][-]{subsubsection.5.3.3}{Phonetically-tied semi-continuous HMMs}{subsection.5.3}% 32
+\BOOKMARK [2][-]{subsection.5.4}{HMM training}{section.5}% 33
+\BOOKMARK [2][-]{subsection.5.5}{HMM parameter initialization}{section.5}% 34
+\BOOKMARK [1][-]{section.6}{Acoustic modeling}{}% 35
+\BOOKMARK [2][-]{subsection.6.1}{Discrete HMMs in continuous space}{section.6}% 36
+\BOOKMARK [2][-]{subsection.6.2}{Source coding}{section.6}% 37
+\BOOKMARK [2][-]{subsection.6.3}{Continuous HMMs}{section.6}% 38
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Conversion to semi-continuous model}{subsection.6.3}% 39
+\BOOKMARK [3][-]{subsubsection.6.3.2}{Conversion to shared semi-continuous model}{subsection.6.3}% 40
+\BOOKMARK [3][-]{subsubsection.6.3.3}{Conversion to tied semi-continuous model}{subsection.6.3}% 41
+\BOOKMARK [2][-]{subsection.6.4}{Parameter tying}{section.6}% 42
+\BOOKMARK [2][-]{subsection.6.5}{Lexicon}{section.6}% 43
+\BOOKMARK [3][-]{subsubsection.6.5.1}{Pronunciation variants}{subsection.6.5}% 44
+\BOOKMARK [2][-]{subsection.6.6}{Context dependent acoustic modeling}{section.6}% 45
+\BOOKMARK [3][-]{subsubsection.6.6.1}{Crossword context modeling}{subsection.6.6}% 46
+\BOOKMARK [3][-]{subsubsection.6.6.2}{Position dependent modeling}{subsection.6.6}% 47
+\BOOKMARK [3][-]{subsubsection.6.6.3}{Parameter tying}{subsection.6.6}% 48
+\BOOKMARK [2][-]{subsection.6.7}{Clustering}{section.6}% 49
+\BOOKMARK [3][-]{subsubsection.6.7.1}{Continuous parametric models}{subsection.6.7}% 50
+\BOOKMARK [3][-]{subsubsection.6.7.2}{Discrete models}{subsection.6.7}% 51
+\BOOKMARK [3][-]{subsubsection.6.7.3}{Kai-Fu Lee}{subsection.6.7}% 52
+\BOOKMARK [3][-]{subsubsection.6.7.4}{Decision trees}{subsection.6.7}% 53
+\BOOKMARK [1][-]{section.7}{Language modeling}{}% 54
+\BOOKMARK [2][-]{subsection.7.1}{Deterministic vs. Stochastic Language Models}{section.7}% 55
+\BOOKMARK [2][-]{subsection.7.2}{N-grams}{section.7}% 56
+\BOOKMARK [3][-]{subsubsection.7.2.1}{Bigrams vs. Trigrams}{subsection.7.2}% 57
+\BOOKMARK [2][-]{subsection.7.3}{Perplexity}{section.7}% 58
+\BOOKMARK [2][-]{subsection.7.4}{Smoothing}{section.7}% 59
+\BOOKMARK [3][-]{subsubsection.7.4.1}{``Add-one'' smoothing}{subsection.7.4}% 60
+\BOOKMARK [3][-]{subsubsection.7.4.2}{Backoff smoothing}{subsection.7.4}% 61
+\BOOKMARK [3][-]{subsubsection.7.4.3}{Linear interpolation}{subsection.7.4}% 62
+\BOOKMARK [2][-]{subsection.7.5}{n-gram classes}{section.7}% 63
+\BOOKMARK [2][-]{subsection.7.6}{Different kinds of language models}{section.7}% 64
+\BOOKMARK [3][-]{subsubsection.7.6.1}{Cache language models}{subsection.7.6}% 65
+\BOOKMARK [3][-]{subsubsection.7.6.2}{Trigger language models}{subsection.7.6}% 66
+\BOOKMARK [3][-]{subsubsection.7.6.3}{Multilevel language models}{subsection.7.6}% 67
+\BOOKMARK [3][-]{subsubsection.7.6.4}{Interleaved language models}{subsection.7.6}% 68
+\BOOKMARK [3][-]{subsubsection.7.6.5}{Morpheme-based language models}{subsection.7.6}% 69
+\BOOKMARK [3][-]{subsubsection.7.6.6}{Context-free grammar language models}{subsection.7.6}% 70
+\BOOKMARK [3][-]{subsubsection.7.6.7}{Tree-based language models}{subsection.7.6}% 71
+\BOOKMARK [3][-]{subsubsection.7.6.8}{HMMs for language modeling}{subsection.7.6}% 72
+\BOOKMARK [2][-]{subsection.7.7}{Vocabulary selection}{section.7}% 73
+\BOOKMARK [2][-]{subsection.7.8}{n-gram pruning}{section.7}% 74
+\BOOKMARK [2][-]{subsection.7.9}{Problems with spontaneous speech}{section.7}% 75
+\BOOKMARK [2][-]{subsection.7.10}{Unknown words}{section.7}% 76
+\BOOKMARK [2][-]{subsection.7.11}{OOV words}{section.7}% 77
+\BOOKMARK [2][-]{subsection.7.12}{Problems with different languages}{section.7}% 78
+\BOOKMARK [2][-]{subsection.7.13}{Problems with Recognition Errors}{section.7}% 79
+\BOOKMARK [2][-]{subsection.7.14}{Language model adaptation}{section.7}% 80
+\BOOKMARK [3][-]{subsubsection.7.14.1}{Retrieval of adaptation data}{subsection.7.14}% 81
+\BOOKMARK [3][-]{subsubsection.7.14.2}{Model interpolation}{subsection.7.14}% 82
+\BOOKMARK [3][-]{subsubsection.7.14.3}{Constraint specification}{subsection.7.14}% 83
+\BOOKMARK [3][-]{subsubsection.7.14.4}{Meta-information extraction}{subsection.7.14}% 84
+\BOOKMARK [1][-]{section.8}{Search}{}% 85
+\BOOKMARK [2][-]{subsection.8.1}{DTW optimization}{section.8}% 86
+\BOOKMARK [2][-]{subsection.8.2}{Viterbi optimization}{section.8}% 87
+\BOOKMARK [2][-]{subsection.8.3}{Advanced optimization techniques}{section.8}% 88
+\BOOKMARK [3][-]{subsubsection.8.3.1}{Two-level DTW}{subsection.8.3}% 89
+\BOOKMARK [3][-]{subsubsection.8.3.2}{Depth-first search}{subsection.8.3}% 90
+\BOOKMARK [3][-]{subsubsection.8.3.3}{Viterbi beam search vs. A stack decoder}{subsection.8.3}% 91
+\BOOKMARK [3][-]{subsubsection.8.3.4}{One stage dynamic programming}{subsection.8.3}% 92
+\BOOKMARK [3][-]{subsubsection.8.3.5}{Unigram lookahead}{subsection.8.3}% 93
+\BOOKMARK [3][-]{subsubsection.8.3.6}{Multi-pass searches}{subsection.8.3}% 94
+\BOOKMARK [3][-]{subsubsection.8.3.7}{Multiple hypothesises}{subsection.8.3}% 95
+\BOOKMARK [1][-]{section.9}{Text-to-speech synthesis}{}% 96
+\BOOKMARK [2][-]{subsection.9.1}{Text analysis}{section.9}% 97
+\BOOKMARK [2][-]{subsection.9.2}{Linguistic analysis}{section.9}% 98
+\BOOKMARK [3][-]{subsubsection.9.2.1}{Bootstrapping}{subsection.9.2}% 99
+\BOOKMARK [2][-]{subsection.9.3}{Waveform synthesis}{section.9}% 100
+\BOOKMARK [1][-]{section.10}{Spoken dialog systems}{}% 101
+\BOOKMARK [1][-]{section.11}{Multilingual speech processing}{}% 102
+\BOOKMARK [1][-]{section.12}{Pr\374fungsfragen}{}% 103
+\BOOKMARK [2][-]{subsection.12.1}{Allgemeine Fragen}{section.12}% 104
+\BOOKMARK [2][-]{subsection.12.2}{Vorverarbeitung}{section.12}% 105
+\BOOKMARK [2][-]{subsection.12.3}{Akkustisches Modell}{section.12}% 106
+\BOOKMARK [2][-]{subsection.12.4}{Sprachmodell}{section.12}% 107

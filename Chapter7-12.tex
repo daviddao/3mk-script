@@ -251,35 +251,70 @@ Remember the fundamental problem of speech recognition:
     \argmax_W P(X \bigm| W) \cdot P(W)
 \]
 
-The purpose of the language model is to compute the probability $P(W)$ of a word sequence $W = (w_1, \ldots, w_n)$. For example, the LM should compute that ''I owe you too`` is more likely than ''Eye O you two``.
+The purpose of the language model is to compute the probability $P(W)$ of a word sequence $W = (w_1, \ldots, w_n)$. \\
+A LM should \dots
+\begin{itemize}
+\item improve speech recognizer by adding another independent information source.
+\item disambiguate homophones, e.g.: \textit{``I OWE YOU TOO''} vs \textit{``EYE O U TWO''}.
+\item reduce search space since not all word sequences are possible.
+\item Analysis to \emph{understand} utterance, disambiguate homonyms (bank: money vs river).
+\end{itemize}
+
+\subsection{Deterministic vs. Stochastic Language Models}
+ 
+In formal language theory (see Chomsky hierarchy) $P(W)$ is either 0 or 1. One way to model a deterministic language is with grammars. This deterministic approach is unsuitable for ASR because spoken language can not be completely covered by grammar and is often ungrammatical, anyway. Thus, stochastic LMs, e.g. \emph{N-grams}, are employed.
+
+\subsection{N-grams}
 
 The difficulty of recognizing a word sequence is correlated to the \textit{branching degree}. For example, the branching degree of \textit{``I apologize for being late, I'm very ---!''} is smaller than the one of \textit{``Hello, my name is ---.''}.
 
-In formal language theory, $P(W)$ is either 0 or 1. This deterministic approach is unsuitable for ASR because spoken language has complex grammatical rules and is often ungrammatical, anyway.
-
-Thus, we employ statistical methods. The choice of the next word depends on the entire history. Since there are too many histories to test them all, we have to find equivalence classes $\mathcal{C}$ so that:
+The choice of the next word depends on the entire history. Since there are too many histories to test them all, we have to find equivalence classes $\mathcal{C}$ so that:
 \[
     P(w \bigm| \mbox{history}) = P(w \bigm| \mathcal{C}(\mbox{history}))
 \]
 
-A common choice for the equivalence classes are $n$-grams:
+We can use different equivalence classes using information about:
+\begin{itemize}
+\item grammatical content
+\item Part-of-Speech (POS) of previous word(s)
+\item semantic meaning of previous word(s)
+\item context similarity
+\item some kind of automatic clustering
+\end{itemize}
+
+A simple, yet common choice for the equivalence classes are $N$-grams:
 \[
     P'(w_k \bigm| w_1, \ldots, w_{k-1}) = P(w_k \bigm| w_{k - (n - 1)}, \ldots, w_{k-1})
 \]
 
 Usually, $P(w \bigm| \mbox{history})$ is estimated by counting relevant occurances:
 \[
-    P(w \bigm| \mbox{history}) = \frac{C(\mbox{history} \cdot w)}{C(\mbox{history})}
+    P(w \bigm| \mbox{history}) = \frac{Count(\mbox{history} \cdot w)}{Count(\mbox{history})}
 \]
+
+$N$-grams are helpful because in HMM-recognizers the language model is responsible for the computation of the transition probabilites between acoustic models on a word level.
+They can be computed on the fly and may depend on previous words.
+
+\subsubsection{Bigrams vs. Trigrams}
+
+While Bigrams can be easily worked into an HMM-recognizer (you only need to take $w_t$ into consideration for the probability of $w_{t+1}$), Trigrams often require a larger history, especially if a word can have many predecessors.
+
+Possible solutions are to use a \emph{time asynchronous search} or use so-called \emph{poor man's trigrams} (e.g. consider only the predecessor's best predecessor).
+
+Additionally the test data coverage of Trigrams is smaller than with Bigrams and the estimation of  $P(w_k \bigm| w_{k - 2}, w_{k-1})$ is more difficult than $P(w_k \bigm|  w_{k-1})$.
+
+\subsection{Perplexity}
+
+To compare to different language models, we need an independent measure. Since the performance of a recognizer not only depends on the Language model, but also the acoustic model and the combination mechanism of the acoustic model with the language model, we use \emph{perplexity}.
 
 A language model is ``good'' if it has a low \textit{perplexity}. The perplexity $PP$ of a language model $P$ on the test set $W = (w_1, \ldots, w_n)$ is:
 \[
-    PP = P(w_1, \ldots, w_n)^{-1/n}
+    PP = P(w_1, \ldots, w_n)^{-1/n} ( = 2^{H(W)})
 \]
 
-The key problem of $n$-grams is the \textit{data sparseness} problem: many n-grams will not occur in the training data, and many others will only occur very few times, resulting in inaccurate calculations. For example, in a several million word collection of English text, 50\% of trigrams occur only once, and 80\% of trigrams occur less than 5 times. As a start, we assign all strings a non-zero probability, in an effort to prevent ASR errors.
-
 \subsection{Smoothing}
+
+The key problem of $n$-grams is the \textit{data sparseness} problem: many n-grams will not occur in the training data, and many others will only occur very few times, resulting in inaccurate calculations. For example, in a several million word collection of English text, 50\% of trigrams occur only once, and 80\% of trigrams occur less than 5 times. As a start, we assign all strings a non-zero probability, in an effort to prevent ASR errors.
 
 The idea of smoothing is to ``free probability mass'' from well-trained events and ``redistribute'' it to unseen events. This is somewhat similar to the idea of taxation.
 
@@ -380,6 +415,8 @@ Define:
 
 Key difference: in the case of non-zero counts, interpolated models still use information from lower-order models while backoff models do not.
 
+(Deleted Interpolation Smoothing)
+
 \subsection{$n$-gram classes}
 
 Another way to handle data sparsity is to group words into classes of similar semantic or grammatical behavior. For simplicity, let's assume that one word $w_i$ can be assigned to only one class $c_i$. Then:
@@ -400,7 +437,7 @@ $n$-gram classes have not improved recognition accuracy significantly.
             P_C(w_k \bigm| w_{k-(n-1)}, \ldots, w_{k-1}) = \frac{1}{2} \cdot f(w_k) + \frac{1}{4} \cdot f(w_k | w_{k-1}) + \frac{1}{4} \cdot f(w_k | w_{k-2} w_{k-1})
         \]
     \item \textbf{Total language model:} $P_T = \lambda_C \cdot P_C + (1 - \lambda_C) \cdot P_S$
-    \item Compute $P_C$ on last $l$ words of cache, vary $\lambda_C$ with cache size.
+    \item \textbf{Variation:} Compute $P_C$ on last $l$ words of cache, vary $\lambda_C$ with cache size.
 \end{itemize}
 
 \subsubsection{Trigger language models}
@@ -451,22 +488,18 @@ In heavily inflicted or agglutinating languages, the word stem is succeeded or p
 Context-free grammars can be used instead of $n$-grams. The rules of the grammar can be written by an expert without the need for lots of training data. CFGs are powerful enough to represent large parts of natural languages and constrained enough to allow for efficient search space reduction. Furthermore, semantic analysis of speech is possible with CFG-derived finite state automata ($\to$ figure~\ref{fig:contextFreeGrammarLM}).
 
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{4cm}
-        \hfill \scriptsize lm2.9
-    \end{minipage}
-    \caption{\label{fig:contextFreeGrammarLM} Context-free grammar language models.}
+\centering
+\includegraphics[width=10cm]{images/cfglm.png}
+\caption{\label{fig:contextFreeGrammarLM} Context-free grammar language models.}
 \end{figure}
 
 \subsubsection{Tree-based language models}
 $n$-grams have a very limited context and training the parameters is almost impossible for large values of $n$. We can use a CART-based technique (classification and regression trees), where every tree node asks about $k$ previous words ($k \approx 20$). Every leaf node is a unigram probability distribution on our vocabulary. This is somewhat similar to clustering acoustic context-dependent models ($\to$ figure~\ref{fig:treeBasedLM}).
 
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{4cm}
-        \hfill \scriptsize lm2.10
-    \end{minipage}
-    \caption{\label{fig:treeBasedLM} Tree-based language models.}
+\centering
+\includegraphics[width=10cm]{images/tblm.png}
+\caption{\label{fig:treeBasedLM} Tree-based language models.}
 \end{figure}
 
 \subsubsection{HMMs for language modeling}
@@ -474,18 +507,17 @@ $n$-grams have a very limited context and training the parameters is almost impo
 Often, speech is carried out in phases, such as \textit{greeting} $\rightarrow$ \textit{smalltalk} $\rightarrow$ \textit{good-bye}. Based on this, we can build an HMM, where every state emits language models or mixture weight distributions ($\to$ figure~\ref{fig:hmmLM}).
 
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{3cm}
-        \hfill \scriptsize lm2.11
-    \end{minipage}
-    \caption{\label{fig:hmmLM} HMMs for language modeling.}
+\centering
+\includegraphics[width=10cm]{images/hmmlm.png}
+\caption{\label{fig:hmmLM} HMMs for language modeling.}
 \end{figure}
 
 \subsection{Vocabulary selection}
-A small vocabulary eliminates potentially confusing candidates and improves the word error rate. A larger vocabulary has a lower out-of-vocabulary rate, but the word error rate increases. The goal is to balance the WER and OOV rates. We do this by using a corpus of text to determine appropriate vocabularies. For example, we can pick data from a specific domain and use the most frequent words.
+A smaller vocabulary eliminates potentially confusing candidates and improves the word error rate. A larger vocabulary has a lower out-of-vocabulary rate, but the word error rate increases. The goal is to balance the WER and OOV rates. We do this by using a corpus of text to determine appropriate vocabularies. For example, we can pick data from a specific domain and use the most frequent words.
 
 \subsection{$n$-gram pruning}
-The size of higher-order $n$-gram models if often too large for practical applications. We can employ $n$-gram pruning to reduce the model size. Experience shows that trigram models can be pruned by more than 25\% without losing recognition accuracy.
+The size of higher-order $n$-gram models if often too large for practical applications. Therefore we reduce the size of $N$-gram models by \textbf{Pruning}. We minimize the relative entropy between original and pruned model and the performance loss.
+Experience shows that trigram models can be pruned by more than 25\% without losing recognition accuracy.
 
 \subsection{Problems with spontaneous speech}
 \begin{itemize}
@@ -509,7 +541,8 @@ Possible solutions are:
 \textit{\textbf{Note:} Here, ``unknown word'' refers to a word not seen in the training data, but occuring in the decoder vocabulary and dictionary - as opposed to not being known at all.}
 \vspace{10pt}
 
-In the acoustic model, we can handle words that have not been seen in the training set by defining their pronunciation(s) in the pronunciation lexicon. However, in most speech recognition tasks, we cannot train all words that might have to be recognized some time. Approaches to this problem include:
+In the acoustic model, we can handle words that have not been seen in the training set by defining their pronunciation(s) in the pronunciation lexicon. However, in most speech recognition tasks, we cannot train all words that might have to be recognized some time. So, how do we incorporate unknown words into the language model? 
+Approaches to this problem include:
 \begin{itemize}
     \item rewrite all words in the training text that only occur one with UNK and treat every unknown word in the recognition run as UNK
     \item use a class-based language model and assign a class to every unknown word
@@ -526,44 +559,50 @@ OOV words are words that are not known at all. These words \textit{must} lead to
     \item \textbf{Problem:} Some languages, e.g. Chinese have a different or no specified notion of words. \textbf{Solution:} Consider syllable-based language models.
 \end{itemize}
 
+\subsection{Problems with Recognition Errors}
+Strong language model constraints can lead to follow-up errors: If a word is misrecognized, strong constraints can lead to the next word(s) to be misrecognized, too.
+An approach to solve this issue may be to change the effect of the language model on the recognition process depending on the current confidence.
+
+
 \subsection{Language model adaptation}
 Natural language is highly variable, depending on time (medieval German vs. current German), domain (fishing vs. politics), context (scientific paper vs. chatting with friends), etc.
 
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{6cm}
-        \hfill \scriptsize lm2.24
-    \end{minipage}
-    \caption{\label{fig:lmAdaptationFramework} Language model adaptation framework.}
+\centering
+\includegraphics[width=10cm]{images/lmaf.png}
+\caption{\label{fig:lmAdaptationFramework} Language model adaptation framework.}
 \end{figure}
 
-Generally, we have a large background corpus $\mathcal{B}$ and a small adaption corpus $\mathcal{A}$ depending on the current task. The goal is to compute a robust language model. We can try to solve this problem by using language model adaptation (see also figure~\ref{fig:lmAdaptationFramework}). There are three techniques of doing this:
+Generally, we have a large background corpus $\mathcal{B}$ and a small adaption corpus $\mathcal{A}$ depending on the current task. The goal is to compute a robust estimate of the language model probability $Pr(w_1,\dots,w_N) = \prod_{q=1}^{N} Pr(w_q | h_q)$, where $h_q = w_{q-n+1}, \dots, w_{q-1}$. We can try to solve this problem by using language model adaptation (see also figure~\ref{fig:lmAdaptationFramework}). There are three techniques of doing this:
 \begin{itemize}
-    \item model interpolation
-    \item constraint specification
-    \item meta-information extraction
+    \item Model Interpolation
+    \item Constraint Specification
+    \item Meta-Information Extraction
 \end{itemize}
 
 \subsubsection{Retrieval of adaptation data}
 We have to retrieve our adaption data froms somehwere:
 \begin{itemize}
-    \item Generate text using a grammar.
-    \item Accumulate $\mathcal{A}$ during the recognition process.
-    \item Use a small corpus $\mathcal{A}$ as a seed for retrieval techniques (online databases and WWW).
+    \item \textbf{Grammar-based system}: Generate text using the grammar. (Random rules or use small corpus to learn rule weights)
+    \item \textbf{Use recognition output}: Accumulate corpus $\mathcal{A}$ during the recognition process, Take N-best or Confusion Networks as adaptation material;
+each hypothesis contributes to corpus according to its posterior likelihood
+    \item \textbf{Search \& Retrieve}: Use a small corpus $\mathcal{A}$ as a seed for retrieval techniques (online databases and WWW).
+\item Augment data at the $N$-gram count level
 \end{itemize}
 
 \subsubsection{Model interpolation}
+\textbf{Idea:} Derive task-specific (\emph{dynamic}) SLM from Corpus $\mathcal{A}$ and combine this with the background (\emph{static}) SLM from $\mathcal{B}$.
 \begin{enumerate}
-    \item linear interpolation: $P(w_q \bigm| h_q) = (1 - \lambda) \cdot P_A(w_q \bigm| h_q) + \lambda \cdot P_B(w_q \bigm| h_q)$
-    \item backoff:
+    \item \textbf{Linear Interpolation}: $P(w_q \bigm| h_q) = (1 - \lambda) \cdot P_A(w_q \bigm| h_q) + \lambda \cdot P_B(w_q \bigm| h_q)$
+    \item \textbf{Backoff}:
         \[
             P(w_q \bigm| h_q) = \begin{cases}
                 P_A(w_q \bigm| h_q) & \mbox{if } C(h_q w_q) \geq T \\
                 \beta \cdot P_B(w_q \bigm| h_q) & \mbox{otherwise}
             \end{cases}
         \]
-    \item dynamic cache model: $P(w_q \bigm| h_q) = \sum\limits_{\left\{c_q\right\}} P(w_q \bigm| c_q) \cdot P(c_q \bigm| h_q)$
-    \item maximum a-posteriori:
+    \item \textbf{Dynamic Cache Model}: $P(w_q \bigm| h_q) = \sum\limits_{\left\{c_q\right\}} P(w_q \bigm| c_q) \cdot P(c_q \bigm| h_q)$
+    \item \textbf{Maximum a-Posteriori}:
         \[
             P(w_q \bigm| h_q) = \frac{\epsilon \cdot C_A(h_qw_q) + C_B(h_qw_q)}{\epsilon \cdot C_A(h_q) + C_B(h_q)}
         \]
@@ -571,8 +610,30 @@ We have to retrieve our adaption data froms somehwere:
 
 \subsubsection{Constraint specification}
 \textbf{Idea:} Extract features from corpus $\mathcal{A}$ that are used as constraints for the adapted SLM.
+Constraint specification is more powerful than Model Interpolation since different weights could be assigned to each extracted feature separately.
+\begin{enumerate}
+\item \textbf{Exponential Models}: Historically constraint-based methods are associated with exponential models trained on Maximum Entropy (ME) criterion which leads to Minimum Discrimination Information estimation.
+\item \textbf{MDI Adaptation}
+\item \textbf{Unigram Constraints}
+\end{enumerate}
+
+
 \subsubsection{Meta-information extraction}
 \textbf{Idea:} Use corpus $\mathcal{A}$ to extract background information about the underlying subject matter. Improve upon the background model based on semantic classification.
+\begin{itemize}
+\item Mixture Models
+\item Semantic Knowledge
+\item Syntactic Infrastructure
+\begin{itemize}
+\item Structured Language Models
+\item Syntactic Triggers
+\end{itemize}
+\item Multiple Sources
+\begin{itemize}
+\item Combination Models
+\item Whole sentence Models
+\end{itemize}
+\end{itemize}
 
 \newpage
 
