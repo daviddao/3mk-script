@@ -326,17 +326,27 @@ In speech analysis, we are particularly interested in discovering the formant st
     \mathcal{F}^{-1}(\log(\mathcal{F}(s))) = \mathcal{F}^{-1}(\log(\mathcal{F}(u))) + \mathcal{F}^{-1}(\log(\mathcal{F}(h)))
 \end{equation}
 
-Note that after the inverse Fourier transform, we are not in the time domain, but in the cepstral domain. The lower cepstral coefficients describe the macro structure of the signal whereas the higher cepstral coefficients describe the micro structure of the signal. Thus, the higher cepstral coefficients are often discarded.
+Note that after the inverse Fourier transform, we are not in the time domain, but in the cepstral domain (also called quefrency). The lower cepstral coefficients describe the macro structure of the signal whereas the higher cepstral coefficients describe the micro structure of the signal. Thus, the higher cepstral coefficients are often discarded.
 
-In order to separate the signal's components, we have to apply a \textit{lifter} to filter out the information we need. This is done by removing cepstral summits with a lowpass lifter.
+In order to separate the signal's components, we have to apply a \textit{lifter} (setting some of the coefficients to 0) to filter out the information we need. This is done by removing cepstral summits with a lowpass lifter.
 
-\subsubsection{Mel-frequency cepstrum}
+A cepstrum in general is:
+\begin{itemize}
+\item efficient and robust coding of speech information
+\item information about rate of change in the different spectrum bands
+\item useful for seperating signals (like the source and filter in the Source-Filter-Model)
+\end{itemize}
 
-MFCCs are coefficients that collectively make up an MFC. MFCCs are commonly derived as follows:
+
+\subsubsection{Mel-frequency cepstrum (MFC)}
+
+MFCCs are coefficients that collectively make up an MFC. 
+MFCCs are commonly derived as follows:
 
 \begin{enumerate}
-    \item apply the Fourier transform to a signal
-    \item apply a Mel filterbank
+    \item segment incoming waveforms into frames (10ms)
+    \item apply the Fourier transform to a signal to compute frequency response
+    \item group the frequency response into 25-40 buckets by applying a Mel filterbank (triangular weighting function)
     \item take the $\log$ of the powers at each Mel ''bucket``
     \item take the discrete cosine transform (DCT) of the list of mel log powers
     \item the MFCCs are the amplitudes of the resulting spectrum
@@ -346,7 +356,7 @@ Usually, we take the first coefficient (the power of the signal) and 12 more coe
 
 \subsection{Feature vectors}
 
-During further processing, we often assume that the speech signal at a given point of time is independent from the signal before and after that point of time. This is a poor assumption. So, if we have a feature vector $x$ (if we're using MFCCs, we have 13 coefficients), we also store the first and second derivatives of $x$, namely $\Delta x$ and $\Delta \Delta x$ (if we're using MFCCs, we now have 39 numbers).
+During further processing, we often assume that the speech signal at a given point of time is independent from the signal before and after that point of time. This is a poor assumption. So, if we have a feature vector $x$ (if we're using MFCCs, we have 13 coefficients), we also store the first and second derivatives of $x$, namely $\Delta x$ and $\Delta \Delta x$ (if we're using MFCCs, we now have 39 numbers - a huge reduction, compared to 8000 numbers in the original speech signal).
 
 \newpage
 
