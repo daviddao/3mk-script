@@ -637,12 +637,14 @@ Constraint specification is more powerful than Model Interpolation since differe
 
 \newpage
 
-\section{Search}
+\section{Search / Decoding}
+
+The entire set of possible HMM state sequences is called the \textbf{search space}. It is not feasible to evaluate every possible sequence of the search space to find the most likely one. Therefore we need an intelligent algorithm that scans the search space and finds the best (or at least very good) hypothesis. \\
 
 \textbf{Isolated word recognition:}
 \begin{itemize}
     \item for every applicable vocabulary word, compute it's score (DTW) and it's likelihood (Forward algorithm)
-    \item report the word with the best score / likelihood
+    \item report the word with the best likelihood / score
 \end{itemize}
 
 \vspace{5pt}
@@ -656,29 +658,71 @@ Constraint specification is more powerful than Model Interpolation since differe
 \vspace{5pt}
 
 \subsection{DTW optimization}
+
+The goal of DTW Review is to identify an example pattern that is most similar to unknown input. For this we also need to compare pattern of different length.
+To achieve this we find the alignment between the unknown input and the example pattern that minimizes the overall distance with a given transition function ($\to$ Figure~\ref{fig:DTWReview}). 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=10cm]{images/dtwreview.png}
+\caption{\label{fig:DTWReview} DTW Review}
+\end{figure}
+
+To save computation time we add constraints:
+
 \begin{itemize}
     \item define start and end point
     \item path should be close to diagonal
     \item no two successive horizontal / vertical steps
-    \item pruning: eliminate losers (with score $s < s_{best} - \Delta$)
+    \item pruning beam: eliminate losers (with score $s < s_{best} - \Delta$)
     \item usually, we're only interested in the final score, so we can overwrite older values
 \end{itemize}
 
 Drawbacks of DTW include speaker dependency and inefficiency for large vocabularies.
 
 \subsection{Viterbi optimization}
-Use tree search ($\to$ figure~\ref{fig:viterbiTreeSearchOptimization}).
+
+The Viterbi algorithm finds the probabilty along with the most likely state sequence. If we operate in log space we can get rid of slow and error prone (overflow) multiplications. The state transition computation is then again based on distances ($\to$ Figure ~\ref{fig:ViterbiReview}): \\
+
+$-log(P(x,y)) = min(-log(P(x-1, y)) + d(x,y),-log(P(x-1, y-1)) + d(x,y))$ \\ 
+$d(x,y) = -log(p(frame_x|s_y))$  \\
+
+It works a lot like DTW ($\to$ Figure ~\ref{fig:DTWReview}). For both methods decisions on best predecessor states are final and scores and transition penalties have to be local.
+
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{5cm}
-        \hfill \scriptsize search1.17
-    \end{minipage}
-    \caption{\label{fig:viterbiTreeSearchOptimization} Viterbi tree search optimization.}
+\centering
+\includegraphics[width=10cm]{images/viterbireview.png}
+\caption{\label{fig:ViterbiReview} Viterbi Review}
 \end{figure}
 
-\subsection{Advanced optimization techniques}
+To futher optimize the Viterbi algorithm, we use tree search: All words that start with the same model, start with exact the same computations ($\to$ Figure ~\ref{fig:viterbiTreeSearchOptimization}).
+\begin{figure}[htb]
+\centering
+\includegraphics[width=10cm]{images/viterbiopt.png}
+\caption{\label{fig:viterbiTreeSearchOptimization} Viterbi tree search optimization.}
+\end{figure}
+
+\subsection{From Isolated to Continuous Speech}
+
+In continuous speech different problems come together:
+\begin{itemize}
+\item sloppier
+\item higher speaking rate
+\item combinatorial explosion of things that can be said
+\item spontaneous effects (restarts, \dots)
+\item Co-articulation
+\item Segmentation
+\end{itemize}
+
+There are several plans to solve those problems.
+
+
+\subsubsection{Cut Continuous Speech into Single Words}
+If we had an algorithm that would segment continuous speech into 1-word chunks, we could run DTW or Viterbi on each chunk.
+But right now there is no reliable segmentation algorithm for detecting word boundaries other than doing recognition itself.
 
 \subsubsection{Two-level DTW}
+We use DTW on two levels:
 \begin{enumerate}
     \item for each remotely likely word begin time, compute DTW with open end within all words
     \item for each word start and end times calculated in the previous step, combine words with DTW based on calculated scores
@@ -689,16 +733,34 @@ Obviously, this is extremely costly for large vocabularies and longer words.
 \subsubsection{Depth-first search}
 
 Depth-first vs. breadth-first corresponds roughly to \textit{time-asynchronous} vs. \textit{time-synchronous}.
+In \textbf{time-synchronous} search, we expand every hypothesis simultaneously, while in \textbf{time-asynchronous} search, we expand partial hypotheses that have different durations ($\to$ Figure ~\ref{fig:SyncVsAsync}).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=10cm]{images/async.png}
+\caption{\label{fig:SyncVsAsync} time-asynchronous vs time-synchronous}
+\end{figure}
 
 \textbf{$A^{\ast}$ search} (usually implemented with a stack decoder):
+
+$A^{\ast}$ search is an example of depth-firt search (or more specifically: admissible best-first search).
+With a stack decoder a time-asynchronous search can be implemented. 
+\begin{itemize}
+\item Sort all partial hypotheses according to their accumulated score
+\item Expand the hypothesis with the highest success-expectation
+\item Success expectation = accumulated score + expectation of remainder score ($A^{\ast}$)
+\item Expansion of hypothesis increases its score (decreases likelihood) $\rightarrow$ some other hypothesis might become best
+\end{itemize}
 
 \subsubsection{Viterbi beam search vs. $A^{\ast}$ stack decoder}
 Beam search doesn't require a heuristic and it is appropriate for parallel implementation. However, it is not admissible, that is it might not find the best solution. Nowadays, beam search is usually preferred over $A^{\ast}$ (though $A^{\ast}$ is taken for search through $n$-best and lattice structures).
 
 \subsubsection{One stage dynamic programming}
-Use Viterbi within words. For the first state of each word, consider the best last state of all words as predecessor. In order to reconstruct the best word sequence, find the best predecessor word to the current word. Finally backtrace.
+Within words Viterbi is used. For the first state of each word, consider the best last state of all words as predecessor. In order to reconstruct the best word sequence, find the best predecessor word to the current word. Finally backtrace.
 
-\textit{\textbf{Note:} ???}
+%\textit{\textbf{Note:} ???}
+
+\subsection{Optimization}
 
 All search techniques use two strategies for efficiency:
 \begin{itemize}
@@ -706,35 +768,45 @@ All search techniques use two strategies for efficiency:
     \item \textbf{Pruning:} Disregard unpromising paths without wasting time exploring them further.
 \end{itemize}
 
+\subsubsection{Pruning with Beam search}
+When using Beam search we define an ``angle'' for how much we want to look to the left and right. Typically that means we only expand states which have accumulated likelihoods greater than $beam \cdot likelihood_{best}$.
+
+\subsection{Searching with LMs}
+
+\subsubsection{Problems}
+
+When using LMs the best predecessor is not the same for all words.
 When using bigrams, the best predecessor depends only on the current word, this is possible by storing one backpointer for each active word end. When using trigrams, the best predecessor also depends on the successor of the current word. Then, things ``get ugly'' and we have to approximate a solution.
+
+\subsubsection{Search with vs. without Language Model}
 
 The transition into an initial state of a word $Z$ is computed by maximizing (Viterbi / DTW) the scores / accumulated distances $C(W)$ of all word-final states in the previous time frame and adding the local acoustic score $am(Z)$: e.g. $C(X) + am(Z)$ vs. $C(Y) + am(Z)$. When using a grammar, we additionally have to add to the accumulated score a language model score $lm(Z)$, e.g. $C(X) + am(Z) + lm(X, Z)$ vs. $C(Y) + am(Z) + lm(Y,Z)$. Without a grammar, the best predecessor state is the same for all word-initial states, whereas with a grammar, the best predecessor state also depends on the word transition probability.
 
-\vspace{10pt}
-
-When using tree search with a language model, we have a problem. After making a word-to-word transition, we don't know which word we are entering, but this knowledge is required to properly compute the probability of the transition. The solution to this are \textbf{delayed bigrams}. We make every word's final state unique. That way, we know which word we processed when we are in the final state. At that point, we can incorporate the language model information into our calculation (hence,
-\textit{delayed}) ($\to$ figure~\ref{fig:delayedBigrams}).
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{4cm}
-        \hfill \scriptsize search2.15
-    \end{minipage}
-    \caption{\label{fig:delayedBigrams} Delayed bigrams.}
+\centering
+\includegraphics[width=10cm]{images/withorwithoutlm.png}
+\caption{\label{fig:NoLmvsLM} without grammars vs. with grammars}
 \end{figure}
 
-\vspace{10pt}
+\subsubsection{Tree-Search with LMs}
+
+
+When using tree search with a language model, we have a problem. After making a word-to-word transition, we don't know which word we are entering, but this knowledge is required to properly compute the probability of the transition. The solution to this are \textbf{delayed bigrams}. We make every word's final state unique. That way, we know which word we processed when we are in the final state. At that point, we can incorporate the language model information into our calculation (hence,
+\textit{delayed}) ($\to$ Figure~\ref{fig:delayedBigrams}).
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=10cm]{images/delayedBigrams.png}
+\caption{\label{fig:delayedBigrams} Delayed bigrams.}
+\end{figure}
 
 \subsubsection{Unigram lookahead}
 No bigram information can be included until word identity is known. Instead, we estimate the unigram information of the remainder subtree and include the bigram information as soon as possible (see also figure~\ref{fig:unigramLookahead}).
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{4cm}
-        \hfill \scriptsize search2.16
-    \end{minipage}
-    \caption{\label{fig:unigramLookahead} Unigram lookahead.}
+\centering
+\includegraphics[width=10cm]{images/unigram.png}
+\caption{\label{fig:unigramLookahead} Unigram lookahead.}
 \end{figure}
-
-\vspace{10pt}
 
 \subsubsection{Multi-pass searches}
 Why use multiple passes in continuous speech recognition:
@@ -763,22 +835,44 @@ When recognizing isolated words, simply report not only the best, but the $n$ be
 
 A problem with multiple hypothesises is that the results are often quite similar in respect to their content words, while the non-content words are more variable. This results in many ``useless'' hypothesis. But if we simply increase $n$, the system may become too slow. The solution to this is to use \textbf{word lattices} ($\to$ figure~\ref{fig:wordLattice}).
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{3cm}
-        \hfill \scriptsize search2.22
-    \end{minipage}
-    \caption{\label{fig:wordLattice} A word lattice.}
+\centering
+\includegraphics[width=10cm]{images/lattices.png}
+\caption{\label{fig:wordLattice} A word lattice.}
 \end{figure}
+
+\subsection{Output Formats}
+There are different types of output:
+\begin{itemize}
+\item \textbf{$1st$-best} $\to$ word string (baseline for WER)
+\item N-best $\to$ N word strings (possibly lower WER, but more difficult)
+\item Lattices $\to$ Time-marked directed, acyclic graph 
+\item Confusion networks $\to$ Directed graph with total ordering
+\end{itemize}
+
+\subsection{Confidence Measures}
+Confidence can be associated with every item of a hypothesis, lattice, Confusion network, etc.
+It is usefuk for judging the output of a recognizer. Confidence measures can be derived from various features, e.g. Lattice Link probability, Hypothesis density or Acoustic stability.
+
+\subsection{Search with Context-Dependent Models}
+
+With Context-Dependent Models word-HMMs look a bit more complicated and the search tree becomes less compact.
+
+\subsection{Search with context dependent phonemes}
+We don't know the successor word when evaluating the last phone in a word. Therefore we keep multiple copies of last phonemes.
+If we are using delayed $N$-grams, the predecessor word is still unknown while evaluating the first phone. So we keep copies of the first phone for all varieties, transit from best into second phone, then when resolving the delayed $N$-gram, we fix the score by incorporating the score difference.
+
+This makes the first and last phonemes the most expensive part of time-synchronous decoding.
+To solve this, we can use Phoneme Lookaheads. We predict how well each partial hypotheses will do in the next frames and then use the estimated future score to prune bad hyptheses.
 
 \newpage
 
 \section{Text-to-speech synthesis}
-
+\emph{``Speech synthesis is the artificial production of human speech.''}
 Typically, text-to-speech synthesis involves three steps:
 \begin{enumerate}
-    \item \textbf{text analysis:} from strings of characters to words
-    \item \textbf{linguistic analysis:} from words to pronunciations and prosody
-    \item \textbf{waveform synthesis:} from pronunciations to waveforms
+    \item \textbf{Text Analysis:} from strings of characters to words
+    \item \textbf{Linguistic Analysis:} from words to pronunciations and prosody
+    \item \textbf{Waveform Synthesis:} from pronunciations to waveforms
 \end{enumerate}
 
 We use the \textit{mean mel cepstral distortion} (\textbf{MCD}) as a quality measure (smaller is better).
@@ -813,6 +907,7 @@ We employ a ``bunch of hacky rules'':
     \item \textbf{token type expander}
     \item \textbf{language model}
 \end{itemize}
+Additionally there are models that help to analyze text from specific domains.
 
 \subsection{Linguistic analysis}
 
@@ -823,9 +918,20 @@ The lexicon should be as comprehensive as possible, but this is impossible. So, 
 \begin{enumerate}
     \item select some frequently occuring words and build lexical entries from them
     \item select an article of text
-    \item synthesize each unknown word, add correct words to list
+    \item synthesize each unknown word, add correct words to list, rebuild
     \item repeat
 \end{enumerate}
+
+Writing letter-to-sound rules by hand is difficult. So we can use an automatic process that builts them from lexicon using epsilon scattering, EM algorithm and CART models.
+
+\subsubsection{Prosody}
+\begin{itemize}
+\item \textbf{Phrasing}: chunking in speech
+\item \textbf{Intonation}: Accents and F0 generation
+\item \textbf{Duration}: length of segments
+\item \textbf{Power}: Loudness
+\end{itemize}
+
 
 \subsection{Waveform synthesis}
 Concatinative synthesis:
@@ -837,6 +943,45 @@ Concatinative synthesis:
     \item cluster-based unit selection
 \end{itemize}
 
+\subsubsection{Diphones}
+
+\begin{itemize}
+\item All phone-phone transitions in language
+\begin{itemize}
+\item one occurrence of each
+\item assume two-phone context is sufficient
+\item may also include common consonant clusters
+\end{itemize}
+\item Mid-phone is more stable so easier to join
+\item Inventory size: $phones^2$
+\item a safe way to build a synthesizer
+\end{itemize}
+
+\subsubsection{Unit selection synthesis}
+Using a large, representative database with multiple examples of each unit type, we select \emph{appropiate} units (phonetically and prosodically) with various unit selection algorithms (cluster, target-concatenation cost, structure matching). On the one side this method is famed for being \emph{excellent}, but on the other it's also \emph{incomprehensible}. 
+
+\subsubsection{Cluster unit selection}
+\begin{itemize}
+\item Cluster unit selection
+\item Decision tree partitioning on acoustic distance
+\item Viterbi selection through candidates
+\end{itemize}
+
+\subsubsection{Build your own Synthetic Voices}
+The standard voice requires:
+\begin{itemize}
+\item A phone set
+\item Text Analysis
+\item Pronounciation
+\item Prosodic modeling
+\item Waveform Generation
+\item language dependent Extras (e.g. arabic vowels)
+\end{itemize}
+
+\subsubsection{Multilingual Speech Synthesis}
+Unit selection is the standard method to select appropriate sub-word units from large databases. A relativley new technology is Parametric Synthesis ``Clustergen (CG)''. CG is a HMM-generation based synthesis that uses cluster units to form models and generates from those models.
+Compared to Unit selection, CG can work with very little speech (about 10 minutes). But the speech sounds buzzy and lacks natural prosody.
+
 \newpage
 
 \section{Spoken dialog systems}
@@ -845,26 +990,27 @@ A dialog is a verbal interaction of two or more agents over more than one uttera
 There are two kinds of initiatives, the \textit{system initiative}, e.g. ``Please tell me your destination airport.'' (more rigid, less ASR errors) or the \textit{mixed initiative}, e.g. ``What flight are you interested in?'' (less rigid, harder to recognize and understand).
 
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{5cm}
-        \hfill \scriptsize sds.7
-    \end{minipage}
-    \caption{\label{figureA} Components of a spoken dialog system.}
+\centering
+\includegraphics[width=10cm]{images/spokendialogsys.png}
+\caption{\label{figureA} Components of a spoken dialog system.}
 \end{figure}
 
 A \textit{discourse} is the entirety of information and structure of the ongoing dialog up to a certain point. Each new utterance must be interpreted in the light of the ongoing discourse and then included in it.
 
 \vspace{5pt}
 
-In order to represent a discourse, Montague grammars are commonly used (transform text into first order logic). Problem: ``A man walks in the park. He whistles'' $\rightarrow (\exists x : man(x) \wedge walksinpark(x)) \wedge (\exists x : whistles(x))$. What we need is \textit{anaphora resolution}.
+In order to represent a discourse, Montague grammars are commonly used (transform text into first order logic). Problem: ``A man walks in the park. He whistles'' $\rightarrow (\exists x : man(x) \wedge walksinpark(x)) \wedge (\exists x : whistles(x))$. What we need is \textit{anaphora resolution}. Discourse Representation Theory (DRT) provides a construction algorithm based on syntax tree.
 
 \vspace{5pt}
 
-Don't forget \textit{typed feature structures}. We can build \textit{semantic grammars} with it.
+Don't forget \textit{typed feature structures} (TFS). We can build \textit{semantic grammars} with it.
+A TFS is a set of named attributes, so called features, which can either be of atomic type or another TFS.
+Two compatible TFS can be unified, resulting in a more specific TFS.
 
-\vspace{5pt}
+Semantic grammars are a convenient way for rule-based natural language understanding based on context-free grammar.
+Additionally a discourse can be separated into Attention, Intention and Discourse Structure.
 
-\textbf{Dialog strategies:}
+\subsection{Dialog strategies:}
 \begin{itemize}
     \item \textbf{plan-based} system: the idea is that communication is the result of a plan (to do / achieve something)
     \item \textbf{grammar-based} system: there are adjacency pairs, such as \textit{question} $\rightarrow$ \textit{answer}, \textit{proposal} $\rightarrow$ \textit{acceptance}, etc.
@@ -880,7 +1026,7 @@ The dialog system has to communicate with the ASR system. Returning only the bes
 
 \vspace{5pt}
 
-If our system is \textit{multimodal}, we can also use gestures, etc.
+If our system is \textit{multimodal}, we can also use gestures, etc. ALSO: Dialog systems should adapt to different types of users. This problem is currently not solved yet. A first attempt is to detect the user state by using multimodal fusion of biosignals. 
 
 \newpage
 
@@ -896,11 +1042,9 @@ We can't simply retrain on foreign data, because:
 For an overview of the system, see figure~\ref{fig:overviewMSPS}.
 
 \begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{7cm}
-        \hfill \scriptsize msp2.4
-    \end{minipage}
-    \caption{\label{fig:overviewMSPS} Overview of multilingual speech processing systems.}
+\centering
+\includegraphics[width=10cm]{images/overviewmsp.png}
+\caption{\label{fig:overviewMSPS} Overview of multilingual speech processing systems.}
 \end{figure}
 
 Let's try to build a language independent ASR system!
@@ -913,9 +1057,7 @@ Let's try to build a language independent ASR system!
     \item universal language model: combine LMs of different languages to allow code switching
 \end{itemize}
 
-\vspace{10pt}
-\textbf{Multilingual acoustic modeling}
-\vspace{10pt}
+\subsection{Multilingual acoustic modeling}
 
 \begin{enumerate}
     \item \begin{itemize}
@@ -928,9 +1070,7 @@ Let's try to build a language independent ASR system!
         \end{itemize}
 \end{enumerate}
 
-\vspace{10pt}
-\textbf{Acoustic model combination}
-\vspace{10pt}
+\subsection{Acoustic model combination}
 
 Sound production is \textit{human}-specific, not \textit{language}-specific. Thus, it is sufficient to represent sounds with the IPA.
 \begin{enumerate}
@@ -943,9 +1083,8 @@ Sound production is \textit{human}-specific, not \textit{language}-specific. Thu
         \end{itemize}
 \end{enumerate}
 
-\vspace{10pt}
-\textbf{Challenges}
-\vspace{5pt}
+
+\subsection{Challenges}
 
 \begin{itemize}
     \item Many ASR algorithms are language independent, but they require lots of training data. For many languages, not a lot of training data exists, so we need a different approach. For example, we might use intelligent learning systems.
@@ -956,13 +1095,12 @@ Sound production is \textit{human}-specific, not \textit{language}-specific. Thu
         \end{itemize}
 \end{itemize}
 
-\vspace{10pt}
-\textbf{Web-derived pronunciations}
-\vspace{5pt}
 
-\vspace{10pt}
-\textbf{Unsupervised training}
-\vspace{5pt}
+\subsection{Web-derived pronunciations}
+
+Idea: Generate pronounciations based on phonetic notations found in the WWW using sites like Wiktionary.
+
+\subsection{Unsupervised training}
 
 Idea: decode untranscribed audio data, select data with high confidence, use selected data to train / adapt recognizer.
 
@@ -980,7 +1118,7 @@ Idea: decode untranscribed audio data, select data with high confidence, use sel
 \end{itemize}
 \item Vor- und Nachteile gegenüber anderen Kommunikationsmitteln
 \begin{itemize}
-\item \emph{siehe Vor- und Nachteile im Kapitel 1} %variabel machen
+\item \emph{siehe Vor- und Nachteile im Skript} %variabel machen
 \end{itemize}
 \item Welche Probleme können dabei auftreten?
 \item Zeichnen sie das Blockschaubild (Young oder Schultz)
