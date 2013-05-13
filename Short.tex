@@ -1,0 +1,39 @@
+\newpage
+\section{Merkblatt}
+\subsection{Überblick: Spoken Language Systems}
+Spoken Language Processing ist ein Schnittbereich aus Psychologie, Informatik, Linguistik und Elektrotechnik. \\
+Ein Spoken Language System braucht \textbf{Spracherkennung}, \textbf{Sprachsynthese} und eine \textbf{Understanding-Komponente} (z.Bsp. Dialog oder Übersetzung)! \\
+Wichtig ist dabei auch \textbf{Domainenwissen}, damit das System spezifische Unterscheidungen beurteilen und angemessen reagieren kann. \\
+Herausforderungen bei der Entwicklung dieser Teilsysteme:
+\begin{itemize}
+\item Robustfähigkeit
+\item Integrierbarkeit
+\item Flexibilität
+\item Effizienz
+\end{itemize}
+
+\subsection{Erster Schritt: Wie kommt die Sprache in den Computer?}
+Mithilfe eines (Kondensator)Mikrofons wird die natürliche Sprache aufgenommen und dann vorverarbeitet, damit der Computer das analoge Signal versteht und bearbeiten kann. Das bedeutet:
+\begin{itemize}
+\item Signaldigitalisierung durch \textbf{Quantisierung} ($2^{16}$ Intervalle) und \textbf{Sampling} \\ (Schutz vor Aliasing: Filter oder Nyquist Theorem)
+\item Digitale Signal Vorverarbeitung mithilfe von Merkmalsextraktion \\(Entnehme aus dem Signal Merkmale die für die Spracherkennung hilfreich sind)
+\end{itemize}
+\subsubsection{Repräsentationsarten}
+Definition: Digitale Repräsentation von Sprache bedeutet, ein akustisches Signal als eine Sequenz von Nummern zu representieren.
+\begin{itemize}
+\item Direkte Representation: Repräsentiere die Sprachwelle so akkurat wie möglich um sie später wieder in ein akustisches Signal umzuwandeln
+\item Parametrische Repräsentation: Wähle eine Menge von Parametern innerhalb eines Modells zur Darstellung des Signals. (Stark abhängig vom Verwendungszweck: Sprachsynthese, Sprachübersetzung, Sprachkodierung)
+\end{itemize}
+
+\subsubsection{Merkmalsextraktion}
+Warum? \begin{itemize}
+ \item Wir wollen wichtige phonetische Information hervorheben
+ \item Macht es einfacher für den Computer mit dem Signal zu arbeiten, weniger Speicher
+ \item Optimiert Generalisierfähigkeit
+ \end{itemize}
+Wie? \begin{itemize}
+\item Es ist schwierig nützliche Information in der time domain herauszuziehen
+\item Wir nehmen uns das menschliche Ohr als Vorbild: Frequenzanalyse
+\item Frequenzanalyse beschleunigt die Signalverarbeitung und erleichtert das Verständnis
+\end{itemize}
+
