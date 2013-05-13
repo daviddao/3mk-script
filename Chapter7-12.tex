@@ -40,7 +40,7 @@ If time is not an issue, we can use a continuous model. Otherwise, we will have 
 
 \subsubsection{Conversion to semi-continuous model}
 
-We ``pull out'' each Gaussian and collect them in a codebook. There will be a maximum of $M \cdot N$ Gaussians, where $N$ is the number of states.
+We ``pull out'' each Gaussian and collect them in a codebook. There will be a maximum of $M \cdot N$ Gaussians, where $N$ is the number of states and $M$ is the number of mixtures (different gaussians).
 
 \subsubsection{Conversion to shared semi-continuous model}
 
@@ -57,6 +57,15 @@ We extend the mixture weights to include Gaussians that were initially assigned 
 \subsubsection{Conversion to tied semi-continuous model}
 
 Reduce the size of the codebook to a smaller size $L < M \cdot N$. Share Gaussians that belong to similar units (\textit{tie units}). This ``ties'' the codebook elements (and states) together. The number of models to train is now manageable.
+
+
+\subsection{Discrete vs. Continuous HMMs}
+\begin{itemize}
+\item Feature space is small and discrete? - Use discrete HMMs
+\item Feature space is small and continuous? - Try discretization (vector quantization)
+\item Feature space is large? - (semi)continuous probably works best
+\item Data set is small? - discrete (fast, compact and little training but low precision) vs. continuous (complementary properties)
+\end{itemize}
 
 \subsection{Parameter tying}
 
@@ -102,6 +111,23 @@ One word can be pronounced differently due to:
     \item correct pronunciation differs from most commonly used ones (e.g. \textit{February} vs. \textit{Febyury})
 \end{itemize}
 To solve this problem, we add variants to the pronunciation dictionary. When building an HMM for a word, we build multiple, alternative state sequences.
+\\
+How do we find Pronounciation variants?
+\begin{itemize}
+\item Linguist \emph{Problem:} Often linguistic units dont correspond to acoustic units
+\item ASR Expert \emph{Problem:} Often most successful approach but also very expensive 
+\item Problems for both approaches: Inconsistencies
+\item Automatic Dictionary Learning: 
+\begin{itemize}
+\item train a phone based recognizer
+\item Run recognition on word based segmented data
+\item Single out the top-N most frequent phoneme sequences per word
+\item Add these sequences as pronounciation to the dictionary
+\item Problems: accuracy of phone recognizer, requires lots of segmented data
+\end{itemize}
+
+\end{itemize}
+
 
 \subsection{Context dependent acoustic modeling}
 
@@ -166,6 +192,7 @@ Both approaches result in a \textit{clustering tree}.
     \item $d(f, g) = \int \min(f(x), g(x))$
     \item Kullback-Leibler divergence: $d_{KL}(f, g) = \int f(x) \ln \frac{f(x)}{g(x)}$
     \item entropy distance: $d(f, g) = H(f + g) - \frac{1}{2} H(f) - \frac{1}{2} H(g)$
+    \item Notice: We want to minimize d because it signals information-loss due to lost parameters
 \end{itemize}
 
 \subsubsection{Discrete models}
@@ -231,12 +258,11 @@ After clustering, we might end up with two classes:
 
 See figure~\ref{fig:growDecisionTree} for an example.
 
-\begin{figure}[htb]
-    \begin{minipage}{\linewidth}
-        \vspace{5cm}
-        \hfill \scriptsize am2.16
-    \end{minipage}
-    \caption{\label{fig:growDecisionTree} Growing the decision tree.}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=10cm]{images/decision.png}
+\caption{Decisiontree}
+\label{fig:growDecisionTree}
 \end{figure}
 
 \textbf{Note:} It doesn't matter which questions we ask, as long as our question set allows for a variable enough separation.
