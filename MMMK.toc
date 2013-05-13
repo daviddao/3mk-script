@@ -17,7 +17,7 @@
 \contentsline {subsection}{\numberline {4.4}Short-Term Spectral Analysis}{10}{subsection.4.4}
 \contentsline {subsection}{\numberline {4.5}Linear Predictive Coding}{10}{subsection.4.5}
 \contentsline {subsection}{\numberline {4.6}Cepstra}{10}{subsection.4.6}
-\contentsline {subsubsection}{\numberline {4.6.1}Mel-frequency cepstrum}{11}{subsubsection.4.6.1}
+\contentsline {subsubsection}{\numberline {4.6.1}Mel-frequency cepstrum (MFC)}{11}{subsubsection.4.6.1}
 \contentsline {subsection}{\numberline {4.7}Feature vectors}{11}{subsection.4.7}
 \contentsline {section}{\numberline {5}Hidden Markov Models}{12}{section.5}
 \contentsline {subsection}{\numberline {5.1}Why do we use HMMs?}{12}{subsection.5.1}
@@ -82,26 +82,49 @@
 \contentsline {subsubsection}{\numberline {7.14.2}Model interpolation}{28}{subsubsection.7.14.2}
 \contentsline {subsubsection}{\numberline {7.14.3}Constraint specification}{28}{subsubsection.7.14.3}
 \contentsline {subsubsection}{\numberline {7.14.4}Meta-information extraction}{28}{subsubsection.7.14.4}
-\contentsline {section}{\numberline {8}Search}{29}{section.8}
+\contentsline {section}{\numberline {8}Search / Decoding}{29}{section.8}
 \contentsline {subsection}{\numberline {8.1}DTW optimization}{29}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Viterbi optimization}{29}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}Advanced optimization techniques}{29}{subsection.8.3}
-\contentsline {subsubsection}{\numberline {8.3.1}Two-level DTW}{29}{subsubsection.8.3.1}
-\contentsline {subsubsection}{\numberline {8.3.2}Depth-first search}{30}{subsubsection.8.3.2}
-\contentsline {subsubsection}{\numberline {8.3.3}Viterbi beam search vs. $A^{\ast }$ stack decoder}{30}{subsubsection.8.3.3}
-\contentsline {subsubsection}{\numberline {8.3.4}One stage dynamic programming}{30}{subsubsection.8.3.4}
-\contentsline {subsubsection}{\numberline {8.3.5}Unigram lookahead}{31}{subsubsection.8.3.5}
-\contentsline {subsubsection}{\numberline {8.3.6}Multi-pass searches}{31}{subsubsection.8.3.6}
-\contentsline {subsubsection}{\numberline {8.3.7}Multiple hypothesises}{31}{subsubsection.8.3.7}
-\contentsline {section}{\numberline {9}Text-to-speech synthesis}{32}{section.9}
-\contentsline {subsection}{\numberline {9.1}Text analysis}{32}{subsection.9.1}
-\contentsline {subsection}{\numberline {9.2}Linguistic analysis}{33}{subsection.9.2}
-\contentsline {subsubsection}{\numberline {9.2.1}Bootstrapping}{33}{subsubsection.9.2.1}
-\contentsline {subsection}{\numberline {9.3}Waveform synthesis}{33}{subsection.9.3}
-\contentsline {section}{\numberline {10}Spoken dialog systems}{34}{section.10}
-\contentsline {section}{\numberline {11}Multilingual speech processing}{35}{section.11}
-\contentsline {section}{\numberline {12}Pr\IeC {\"u}fungsfragen}{37}{section.12}
-\contentsline {subsection}{\numberline {12.1}Allgemeine Fragen}{37}{subsection.12.1}
-\contentsline {subsection}{\numberline {12.2}Vorverarbeitung}{37}{subsection.12.2}
-\contentsline {subsection}{\numberline {12.3}Akkustisches Modell}{39}{subsection.12.3}
-\contentsline {subsection}{\numberline {12.4}Sprachmodell}{40}{subsection.12.4}
+\contentsline {subsection}{\numberline {8.2}Viterbi optimization}{30}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}From Isolated to Continuous Speech}{30}{subsection.8.3}
+\contentsline {subsubsection}{\numberline {8.3.1}Cut Continuous Speech into Single Words}{31}{subsubsection.8.3.1}
+\contentsline {subsubsection}{\numberline {8.3.2}Two-level DTW}{31}{subsubsection.8.3.2}
+\contentsline {subsubsection}{\numberline {8.3.3}Depth-first search}{31}{subsubsection.8.3.3}
+\contentsline {subsubsection}{\numberline {8.3.4}Viterbi beam search vs. $A^{\ast }$ stack decoder}{31}{subsubsection.8.3.4}
+\contentsline {subsubsection}{\numberline {8.3.5}One stage dynamic programming}{32}{subsubsection.8.3.5}
+\contentsline {subsection}{\numberline {8.4}Optimization}{32}{subsection.8.4}
+\contentsline {subsubsection}{\numberline {8.4.1}Pruning with Beam search}{32}{subsubsection.8.4.1}
+\contentsline {subsection}{\numberline {8.5}Searching with LMs}{32}{subsection.8.5}
+\contentsline {subsubsection}{\numberline {8.5.1}Problems}{32}{subsubsection.8.5.1}
+\contentsline {subsubsection}{\numberline {8.5.2}Search with vs. without Language Model}{32}{subsubsection.8.5.2}
+\contentsline {subsubsection}{\numberline {8.5.3}Tree-Search with LMs}{32}{subsubsection.8.5.3}
+\contentsline {subsubsection}{\numberline {8.5.4}Unigram lookahead}{33}{subsubsection.8.5.4}
+\contentsline {subsubsection}{\numberline {8.5.5}Multi-pass searches}{33}{subsubsection.8.5.5}
+\contentsline {subsubsection}{\numberline {8.5.6}Multiple hypothesises}{34}{subsubsection.8.5.6}
+\contentsline {subsection}{\numberline {8.6}Output Formats}{34}{subsection.8.6}
+\contentsline {subsection}{\numberline {8.7}Confidence Measures}{34}{subsection.8.7}
+\contentsline {subsection}{\numberline {8.8}Search with Context-Dependent Models}{34}{subsection.8.8}
+\contentsline {subsection}{\numberline {8.9}Search with context dependent phonemes}{34}{subsection.8.9}
+\contentsline {section}{\numberline {9}Text-to-speech synthesis}{35}{section.9}
+\contentsline {subsection}{\numberline {9.1}Text analysis}{35}{subsection.9.1}
+\contentsline {subsection}{\numberline {9.2}Linguistic analysis}{35}{subsection.9.2}
+\contentsline {subsubsection}{\numberline {9.2.1}Bootstrapping}{36}{subsubsection.9.2.1}
+\contentsline {subsubsection}{\numberline {9.2.2}Prosody}{36}{subsubsection.9.2.2}
+\contentsline {subsection}{\numberline {9.3}Waveform synthesis}{36}{subsection.9.3}
+\contentsline {subsubsection}{\numberline {9.3.1}Diphones}{36}{subsubsection.9.3.1}
+\contentsline {subsubsection}{\numberline {9.3.2}Unit selection synthesis}{36}{subsubsection.9.3.2}
+\contentsline {subsubsection}{\numberline {9.3.3}Cluster unit selection}{37}{subsubsection.9.3.3}
+\contentsline {subsubsection}{\numberline {9.3.4}Build your own Synthetic Voices}{37}{subsubsection.9.3.4}
+\contentsline {subsubsection}{\numberline {9.3.5}Multilingual Speech Synthesis}{37}{subsubsection.9.3.5}
+\contentsline {section}{\numberline {10}Spoken dialog systems}{38}{section.10}
+\contentsline {subsection}{\numberline {10.1}Dialog strategies:}{38}{subsection.10.1}
+\contentsline {section}{\numberline {11}Multilingual speech processing}{40}{section.11}
+\contentsline {subsection}{\numberline {11.1}Multilingual acoustic modeling}{40}{subsection.11.1}
+\contentsline {subsection}{\numberline {11.2}Acoustic model combination}{40}{subsection.11.2}
+\contentsline {subsection}{\numberline {11.3}Challenges}{41}{subsection.11.3}
+\contentsline {subsection}{\numberline {11.4}Web-derived pronunciations}{41}{subsection.11.4}
+\contentsline {subsection}{\numberline {11.5}Unsupervised training}{41}{subsection.11.5}
+\contentsline {section}{\numberline {12}Pr\IeC {\"u}fungsfragen}{42}{section.12}
+\contentsline {subsection}{\numberline {12.1}Allgemeine Fragen}{42}{subsection.12.1}
+\contentsline {subsection}{\numberline {12.2}Vorverarbeitung}{42}{subsection.12.2}
+\contentsline {subsection}{\numberline {12.3}Akkustisches Modell}{44}{subsection.12.3}
+\contentsline {subsection}{\numberline {12.4}Sprachmodell}{45}{subsection.12.4}

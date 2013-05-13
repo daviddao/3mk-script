@@ -59,43 +59,74 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {7.14.2}Model interpolation}{28}{subsubsection.7.14.2}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {7.14.3}Constraint specification}{28}{subsubsection.7.14.3}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {7.14.4}Meta-information extraction}{28}{subsubsection.7.14.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Search}{29}{section.8}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Search / Decoding}{29}{section.8}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {8.1}DTW optimization}{29}{subsection.8.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Viterbi optimization}{29}{subsection.8.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces  Viterbi tree search optimization.\relax }}{29}{figure.11}}
-\newlabel{fig:viterbiTreeSearchOptimization}{{11}{29}{Viterbi tree search optimization.\relax \relax }{figure.11}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Advanced optimization techniques}{29}{subsection.8.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.1}Two-level DTW}{29}{subsubsection.8.3.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.2}Depth-first search}{30}{subsubsection.8.3.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.3}Viterbi beam search vs. $A^{\ast }$ stack decoder}{30}{subsubsection.8.3.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.4}One stage dynamic programming}{30}{subsubsection.8.3.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces  Delayed bigrams.\relax }}{30}{figure.12}}
-\newlabel{fig:delayedBigrams}{{12}{30}{Delayed bigrams.\relax \relax }{figure.12}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.5}Unigram lookahead}{31}{subsubsection.8.3.5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces  Unigram lookahead.\relax }}{31}{figure.13}}
-\newlabel{fig:unigramLookahead}{{13}{31}{Unigram lookahead.\relax \relax }{figure.13}{}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.6}Multi-pass searches}{31}{subsubsection.8.3.6}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.7}Multiple hypothesises}{31}{subsubsection.8.3.7}}
-\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces  A word lattice.\relax }}{32}{figure.14}}
-\newlabel{fig:wordLattice}{{14}{32}{A word lattice.\relax \relax }{figure.14}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Text-to-speech synthesis}{32}{section.9}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Text analysis}{32}{subsection.9.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Linguistic analysis}{33}{subsection.9.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.2.1}Bootstrapping}{33}{subsubsection.9.2.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Waveform synthesis}{33}{subsection.9.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {10}Spoken dialog systems}{34}{section.10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces  Components of a spoken dialog system.\relax }}{34}{figure.15}}
-\newlabel{figureA}{{15}{34}{Components of a spoken dialog system.\relax \relax }{figure.15}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {11}Multilingual speech processing}{35}{section.11}}
-\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces  Overview of multilingual speech processing systems.\relax }}{35}{figure.16}}
-\newlabel{fig:overviewMSPS}{{16}{35}{Overview of multilingual speech processing systems.\relax \relax }{figure.16}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {12}Pr\IeC {\"u}fungsfragen}{37}{section.12}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}Allgemeine Fragen}{37}{subsection.12.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Vorverarbeitung}{37}{subsection.12.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}Akkustisches Modell}{39}{subsection.12.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Sprachmodell}{40}{subsection.12.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces  DTW Review\relax }}{29}{figure.11}}
+\newlabel{fig:DTWReview}{{11}{29}{DTW Review\relax \relax }{figure.11}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Viterbi optimization}{30}{subsection.8.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces  Viterbi Review\relax }}{30}{figure.12}}
+\newlabel{fig:ViterbiReview}{{12}{30}{Viterbi Review\relax \relax }{figure.12}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces  Viterbi tree search optimization.\relax }}{30}{figure.13}}
+\newlabel{fig:viterbiTreeSearchOptimization}{{13}{30}{Viterbi tree search optimization.\relax \relax }{figure.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}From Isolated to Continuous Speech}{30}{subsection.8.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.1}Cut Continuous Speech into Single Words}{31}{subsubsection.8.3.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.2}Two-level DTW}{31}{subsubsection.8.3.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.3}Depth-first search}{31}{subsubsection.8.3.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces  time-asynchronous vs time-synchronous\relax }}{31}{figure.14}}
+\newlabel{fig:SyncVsAsync}{{14}{31}{time-asynchronous vs time-synchronous\relax \relax }{figure.14}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.4}Viterbi beam search vs. $A^{\ast }$ stack decoder}{31}{subsubsection.8.3.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.3.5}One stage dynamic programming}{32}{subsubsection.8.3.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Optimization}{32}{subsection.8.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.4.1}Pruning with Beam search}{32}{subsubsection.8.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.5}Searching with LMs}{32}{subsection.8.5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.5.1}Problems}{32}{subsubsection.8.5.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.5.2}Search with vs. without Language Model}{32}{subsubsection.8.5.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces  without grammars vs. with grammars\relax }}{32}{figure.15}}
+\newlabel{fig:NoLmvsLM}{{15}{32}{without grammars vs. with grammars\relax \relax }{figure.15}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.5.3}Tree-Search with LMs}{32}{subsubsection.8.5.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces  Delayed bigrams.\relax }}{33}{figure.16}}
+\newlabel{fig:delayedBigrams}{{16}{33}{Delayed bigrams.\relax \relax }{figure.16}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.5.4}Unigram lookahead}{33}{subsubsection.8.5.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces  Unigram lookahead.\relax }}{33}{figure.17}}
+\newlabel{fig:unigramLookahead}{{17}{33}{Unigram lookahead.\relax \relax }{figure.17}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.5.5}Multi-pass searches}{33}{subsubsection.8.5.5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.5.6}Multiple hypothesises}{34}{subsubsection.8.5.6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces  A word lattice.\relax }}{34}{figure.18}}
+\newlabel{fig:wordLattice}{{18}{34}{A word lattice.\relax \relax }{figure.18}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.6}Output Formats}{34}{subsection.8.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.7}Confidence Measures}{34}{subsection.8.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.8}Search with Context-Dependent Models}{34}{subsection.8.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.9}Search with context dependent phonemes}{34}{subsection.8.9}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Text-to-speech synthesis}{35}{section.9}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Text analysis}{35}{subsection.9.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Linguistic analysis}{35}{subsection.9.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.2.1}Bootstrapping}{36}{subsubsection.9.2.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.2.2}Prosody}{36}{subsubsection.9.2.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.3}Waveform synthesis}{36}{subsection.9.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.3.1}Diphones}{36}{subsubsection.9.3.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.3.2}Unit selection synthesis}{36}{subsubsection.9.3.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.3.3}Cluster unit selection}{37}{subsubsection.9.3.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.3.4}Build your own Synthetic Voices}{37}{subsubsection.9.3.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {9.3.5}Multilingual Speech Synthesis}{37}{subsubsection.9.3.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Spoken dialog systems}{38}{section.10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces  Components of a spoken dialog system.\relax }}{38}{figure.19}}
+\newlabel{figureA}{{19}{38}{Components of a spoken dialog system.\relax \relax }{figure.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {10.1}Dialog strategies:}{38}{subsection.10.1}}
+\@writefile{toc}{\contentsline {section}{\numberline {11}Multilingual speech processing}{40}{section.11}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces  Overview of multilingual speech processing systems.\relax }}{40}{figure.20}}
+\newlabel{fig:overviewMSPS}{{20}{40}{Overview of multilingual speech processing systems.\relax \relax }{figure.20}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.1}Multilingual acoustic modeling}{40}{subsection.11.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.2}Acoustic model combination}{40}{subsection.11.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.3}Challenges}{41}{subsection.11.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.4}Web-derived pronunciations}{41}{subsection.11.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {11.5}Unsupervised training}{41}{subsection.11.5}}
+\@writefile{toc}{\contentsline {section}{\numberline {12}Pr\IeC {\"u}fungsfragen}{42}{section.12}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.1}Allgemeine Fragen}{42}{subsection.12.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.2}Vorverarbeitung}{42}{subsection.12.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.3}Akkustisches Modell}{44}{subsection.12.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {12.4}Sprachmodell}{45}{subsection.12.4}}
 \@setckpt{Chapter7-12}{
-\setcounter{page}{43}
+\setcounter{page}{48}
 \setcounter{equation}{14}
 \setcounter{enumi}{2}
 \setcounter{enumii}{0}
@@ -109,13 +140,13 @@
 \setcounter{subsubsection}{0}
 \setcounter{paragraph}{0}
 \setcounter{subparagraph}{0}
-\setcounter{figure}{16}
+\setcounter{figure}{20}
 \setcounter{table}{0}
 \setcounter{parentequation}{0}
 \setcounter{float@type}{4}
 \setcounter{ContinuedFloat}{0}
-\setcounter{Item}{47}
+\setcounter{Item}{48}
 \setcounter{Hfootnote}{0}
-\setcounter{bookmark@seq@number}{107}
+\setcounter{bookmark@seq@number}{130}
 \setcounter{section@level}{2}
 }
